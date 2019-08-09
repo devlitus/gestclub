@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { isNullOrUndefined } from "util";
 import { AlertController } from "@ionic/angular";
 import { NgForm } from "@angular/forms";
-import { Route, Router } from "@angular/router";
 import { UserService } from "../api/user.service";
 
 @Component({
@@ -11,34 +10,33 @@ import { UserService } from "../api/user.service";
   styleUrls: ["./login.page.scss"]
 })
 export class LoginPage implements OnInit {
-  constructor(
-    public alertCtrl: AlertController,
-    public router: Router,
-    private _service: UserService
-  ) {}
+  constructor(private _service: UserService, public alertCtrl: AlertController,) {}
 
   ngOnInit() {}
   onSubmit(form: NgForm) {
+    let username = form.value.name.charAt(0).toUpperCase() + form.value.name.slice(1);
+    let user = {
+      name: username,
+      pass: form.value.pass
+    }
     if (
       isNullOrUndefined(form.value.name) ||
       isNullOrUndefined(form.value.pass)
     ) {
-      this.alert();
+      this.alert("Los campos no puedes estar vacios");
       return;
     } else if (form.value.name === "" || form.value.pass === "") {
-      this.alert();
+      this.alert("Los campos no puedes estar vacios");
       return;
     }
-    this._service.getUser().subscribe(data => {
-      console.log(data);
-    });
+    this._service.getUser(user).subscribe()
     // this.router.navigate(['/team']);
   }
 
-  async alert() {
+  async alert(message: string) {
     let alert = await this.alertCtrl.create({
-      header: "Usuario Incorrecto!",
-      subHeader: "Hable con el administrador o intente de nuevo",
+      header: message,
+      subHeader: "Introduce los valores correspondientes",
       buttons: ["Aceptar"]
     });
     await alert.present();
