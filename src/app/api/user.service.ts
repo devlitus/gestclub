@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { url } from "../config/config";
-import { map, isEmpty } from "rxjs/operators";
-import { AlertController } from '@ionic/angular';
+import { map } from "rxjs/operators";
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from "@angular/router";
 @Injectable({
   providedIn: "root"
@@ -13,6 +13,7 @@ export class UserService {
   constructor(
     private _http: HttpClient, 
     public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,
     public router: Router,
     ) {}
 
@@ -31,6 +32,7 @@ export class UserService {
             this.alert("Usuario Incorrecto!!!");
           }else{
             this.saveLocalStorage(this.currentUser);
+            this.router.navigate(['/team']);
           }
         }
       })

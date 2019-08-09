@@ -14,11 +14,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
   onSubmit(form: NgForm) {
-    let username = form.value.name.charAt(0).toUpperCase() + form.value.name.slice(1);
-    let user = {
-      name: username,
-      pass: form.value.pass
-    }
     if (
       isNullOrUndefined(form.value.name) ||
       isNullOrUndefined(form.value.pass)
@@ -28,6 +23,11 @@ export class LoginPage implements OnInit {
     } else if (form.value.name === "" || form.value.pass === "") {
       this.alert("Los campos no puedes estar vacios");
       return;
+    }
+    let username = form.value.name.charAt(0).toUpperCase() + form.value.name.slice(1);
+    let user = {
+      name: username,
+      pass: form.value.pass
     }
     this._service.getUser(user).subscribe()
     // this.router.navigate(['/team']);
@@ -41,4 +41,5 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
+
 }
