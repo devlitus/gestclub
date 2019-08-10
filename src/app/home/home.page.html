@@ -1,14 +1,26 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="team"></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      Gestión
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<ion-content class="ion-padding">
+<h1>LOGO</h1>
+<p>Entrenador: {{coach.name}}</p>
+<p>Equipo: {{team}}</p>
+<p>Planificación: {{planning}}</p>
+<ion-button expand='block' (click)="onClick()">
+  PLanificación
+</ion-button>
+<ion-button expand='block' (click)="onClick()">
+  Sesiones
+</ion-button>
+<ion-button expand='block' (click)="onClick()">
+  Jugador
+</ion-button>
 </ion-content>

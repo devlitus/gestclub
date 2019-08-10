@@ -6,8 +6,9 @@
 
 <ion-content>
 <ion-list>
-  <ion-item>
-    <ion-label>Awesome Label</ion-label>
+  <ion-item [routerLink]="['/home', teams.team_name, teams.id_planing]">
+    <ion-label>{{teams.team_name}}</ion-label>
+    <p>planificación {{teams.id_planing}}</p>
   </ion-item>
 </ion-list>
 </ion-content>

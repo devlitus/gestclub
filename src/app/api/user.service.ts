@@ -4,6 +4,7 @@ import { url } from "../config/config";
 import { map } from "rxjs/operators";
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from "@angular/router";
+import { Storage } from '@ionic/storage';
 @Injectable({
   providedIn: "root"
 })
@@ -15,6 +16,7 @@ export class UserService {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public router: Router,
+    private storage: Storage
     ) {}
 
   getUser(user: any) {

@@ -1,5 +1,7 @@
 {
   "name": "gestclub",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
