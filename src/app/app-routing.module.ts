@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'team', loadChildren: './team/team.module#TeamPageModule' },
   { path: 'deport', loadChildren: './deport/deport.module#DeportPageModule' },
   { path: 'management', loadChildren: './management/management.module#ManagementPageModule' },
+  { path: 'list-users', loadChildren: './list-users/list-users.module#ListUsersPageModule' },
 ];
 
 @NgModule({
