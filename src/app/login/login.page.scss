@@ -1,5 +1,12 @@
-.canbiar {
-  font-size: .8rem;
-  text-align: center;
+ion-button[type=submit]{
+  margin-top: 2vh;
+  --background: green;
+  --color-hover: red;
+}
+
+.enlaces {
   text-decoration: none;
+}
+.relleno{
+  margin-top: 5vh;
 }

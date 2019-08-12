@@ -34,7 +34,7 @@ export class UserService {
             this.alert("Usuario Incorrecto!!!");
           }else{
             this.saveLocalStorage(this.currentUser);
-            this.router.navigate(['/team']);
+            this.router.navigate(['/deport']);
           }
         }
       })
