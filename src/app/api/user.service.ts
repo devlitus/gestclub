@@ -40,6 +40,9 @@ export class UserService {
       })
     );
   }
+  getTotalUsers(){
+    return this._http.get(url +'/users');
+  }
   saveLocalStorage(user: any){
     if(user){
       let u = {

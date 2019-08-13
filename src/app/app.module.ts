@@ -10,10 +10,11 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UserAddComponent } from './components/user-add/user-add.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, UserAddComponent],
+  entryComponents: [UserAddComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(),
