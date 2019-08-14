@@ -1,29 +1,32 @@
-<!-- <ion-header>
+<ion-header>
   <ion-toolbar>
-    <ion-title>Inicia Sesió</ion-title>
+    <ion-title>Iniciar Sessió</ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content padding>
-  <div class="relleno"></div>
-  <form (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <ion-item>
-      <ion-label position="floating">Nom</ion-label>
-      <ion-input (ngModel)="name" name="name" autofocus="true"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Contrasenya</ion-label>
-      <ion-input (ngModel)="pass" name="pass"></ion-input>
-    </ion-item>
-    <ion-button type="submit" expand="block">Inicia Sesisó</ion-button>
-  </form>
-  <ion-row padding>
-    <ion-col size="12" offset="1">
-      <a class="enlaces" href="#">¿Vols cambiar de contrasenya?</a>
-    </ion-col>
-    <ion-col size="12">
-      <ion-img src="assets/logos/logoVendell2.gif"></ion-img>
-    </ion-col>
-  </ion-row>
+  <div class="relleno">
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+      <ion-item>
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input
+          (ngModel)="(name)"
+          name="name"
+          autofocus="true"
+          type="text"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contrasenya</ion-label>
+        <ion-input (ngModel)="(pass)" name="pass" type="password"></ion-input>
+      </ion-item>
+      <ion-button type="submit" expand="block">Iniciar Sessió</ion-button>
+    </form>
+    <ion-row padding>
+      <ion-col size="12" offset="1">
+        <a class="enlaces" href="#">¿Vols canviar de contrasenya?</a>
+      </ion-col>
+    </ion-row>
+  </div>
   <!-- <ion-spinner name="crescent" color="tertiary"></ion-spinner> -->
 </ion-content>

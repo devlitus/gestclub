@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'team', loadChildren: './team/team.module#TeamPageModule' },
   { path: 'deport', loadChildren: './deport/deport.module#DeportPageModule' },
-  { path: 'management/:?', loadChildren: './management/management.module#ManagementPageModule' },
+  { path: 'management', loadChildren: './management/management.module#ManagementPageModule' },
   { path: 'users', loadChildren: './users/users.module#UsersPageModule' },
   { path: 'users/:?', component: UserAddComponent },
 ];
