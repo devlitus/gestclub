@@ -43,6 +43,13 @@ export class UserService {
   getTotalUsers(){
     return this._http.get(url +'/users');
   }
+  insertUser(from: any) {
+    return this._http.post(url, from).pipe(
+      map((data: any) => {
+        console.log(data);
+      })
+    )
+  }
   saveLocalStorage(user: any){
     if(user){
       let u = {

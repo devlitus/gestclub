@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../api/user.service';
+
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.page.html',
@@ -8,7 +10,7 @@ import { UserService } from '../api/user.service';
 export class UsersPage implements OnInit {
   users: any = []
   constructor(public _serviceUser:UserService) { }
-
+  
   ngOnInit() {
     this.showUsers();
   }

@@ -1,6 +1,6 @@
 <ion-content>
   <ion-grid fixed>
-    <form>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit($event)">
       <ion-row>
         <ion-col size="6">
           <ion-item>
@@ -27,7 +27,11 @@
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating">E-Mail</ion-label>
-            <ion-input formControlName="email" name="email" type="email"></ion-input>
+            <ion-input
+              formControlName="email"
+              name="email"
+              type="email"
+            ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -35,13 +39,21 @@
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Contrasenya</ion-label>
-            <ion-input formControlName="password" name="password" type="password"></ion-input>
+            <ion-input
+              formControlName="password"
+              name="password"
+              type="password"
+            ></ion-input>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Telèfon</ion-label>
-            <ion-input formControlName="telf" name="telf" type="tel"></ion-input>
+            <ion-input
+              formControlName="telf"
+              name="telf"
+              type="tel"
+            ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -55,18 +67,28 @@
         <ion-col size="6">
           <ion-item>
             <ion-label position="floating">Data de neixament</ion-label>
-            <ion-input formControlName="birthday" name="birthday" type="text"></ion-input>
+            <ion-input
+              formControlName="birthday"
+              name="birthday"
+              type="date"
+            ></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12">
-            <input formControlName="files" type="file" id="fileLoader" name="files" title="Load File"/>
+          <input
+            #file
+            type="file"
+            id="fileLoader"
+            name="files"
+            title="Load File"
+          />
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12">
-          <ion-button expand="full" fill="solid" [routerLink]="['/users']">
+          <ion-button type="submit" expand="full" fill="solid" [disabled]="!userForm.valid">
             <ion-icon slot="end" name="send"></ion-icon>
             Inserta Usuari
           </ion-button>
@@ -75,3 +97,4 @@
     </form>
   </ion-grid>
 </ion-content>
+<!-- formControlName="files" -->
