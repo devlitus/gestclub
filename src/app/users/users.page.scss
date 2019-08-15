@@ -1,8 +1,16 @@
+
+ion-card {
+  --background: null;
+  background-image: url('/assets/Fondo-op.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 ion-list.list-md {
-  background: tvar(--ion-item-background,var(--ion-background-color,transparent));
+  background: tvar(--ion-item-background,var(--ion-background-color));
 }
 ion-item {
-  --background: transparent;
+  opacity: .8;
 }
 .bg-btn{
   --background: green;

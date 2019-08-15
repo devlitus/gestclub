@@ -8,34 +8,68 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item-sliding *ngFor="let user of users">
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="assets/icon/user.png" />
-        </ion-avatar>
-        <ion-label>{{ user.username }}</ion-label>
-        <ion-note slot="end">{{ user.team }} </ion-note>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option [routerLink]="['/users/create', user.id]">
-          Editar
-          <ion-icon slot="end" name="create"></ion-icon>
-        </ion-item-option>
-        <ion-item-option color="danger" (click)="onTrash(user.id)">
-          Eliminar
-          <ion-icon slot="end" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-list lines="full">
+  <ion-item-sliding *ngFor="let user of users">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/icon/user.png" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ user.username }} {{ user.lasname }}</h2>
+        <!-- <h4></h4> -->
+        <ion-badge color="primary">Cordinador</ion-badge>&nbsp;
+        <ion-badge color="tertiary">Entrenador</ion-badge>        
+      </ion-label>
+      <ion-note slot="end">
+        1 Catalana 
+      </ion-note>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option [routerLink]="['/users/create', user.id]">
+        Editar
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-item-option>
+      <ion-item-option color="danger" (click)="onTrash(user.id)">
+        Eliminar
+        <ion-icon slot="end" name="trash"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+    
 </ion-content>
 <ion-footer class="ion-padding">
   <ion-toolbar>
-      <ion-button class="bg-btn" expand="full" fill="solid" [routerLink]="['/users/add']">
-        <ion-icon slot="start" name="add"></ion-icon>
-        Afegir usuari
-      </ion-button>
-  
+    <ion-button
+      class="bg-btn"
+      expand="full"
+      fill="solid"
+      [routerLink]="['/users/add']"
+    >
+      <ion-icon slot="start" name="add"></ion-icon>
+      Afegir usuari
+    </ion-button>
   </ion-toolbar>
 </ion-footer>
+
+<!-- <ion-list>
+  <ion-item-sliding *ngFor="let user of users">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="assets/icon/user.png" />
+      </ion-avatar>
+      <ion-label>{{ user.username }}</ion-label>
+      <ion-note slot="end">{{ user.team }} </ion-note>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option [routerLink]="['/users/create', user.id]">
+        Editar
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-item-option>
+      <ion-item-option color="danger" (click)="onTrash(user.id)">
+        Eliminar
+        <ion-icon slot="end" name="trash"></ion-icon>
+      </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list> -->
