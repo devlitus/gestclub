@@ -1,5 +1,9 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
+// @import url('https://fonts.googleapis.com/css?family=Gochi+Hand&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Caveat+Brush|Gochi+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Caveat+Brush|Gochi+Hand|Roboto&display=swap');
+// @import url('assets/fonts/Roboto/Roboto-Medium.ttf');
 
 /** Ionic CSS Variables **/
 :root {
@@ -74,6 +78,11 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** Fonts **/
+  --ion-font-family: 'Roboto', sans-serif;
+
+  /** background **/
   ion-content {
     --background: null;
     background-image: url('/assets/logos/Fondo-op.png');
