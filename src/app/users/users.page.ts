@@ -22,5 +22,9 @@ export class UsersPage implements OnInit {
       }
     })
   }
+
+  onEdit(item: any){
+    console.log(item);
+  }
   
 }

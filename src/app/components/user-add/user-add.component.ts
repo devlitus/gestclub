@@ -9,6 +9,9 @@ import { UserService } from 'src/app/api/user.service';
   styleUrls: ['./user-add.component.scss'],
 })
 export class UserAddComponent implements OnInit {
+  email = {
+    invalid: false
+  }
 
   constructor(private _service: UserService) { }
   userForm = new FormGroup({
