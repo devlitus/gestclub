@@ -26,10 +26,10 @@ export class LoginPage implements OnInit {
     }
     let username = form.value.name.charAt(0).toUpperCase() + form.value.name.slice(1);
     let user = {
-      name: username,
-      pass: form.value.pass
+      username: username,
+      password  : form.value.pass
     }
-    this._service.getUser(user).subscribe()
+    this._service.verficarLogin(user).subscribe()
     // this.router.navigate(['/team']);
   }
 

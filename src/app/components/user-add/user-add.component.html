@@ -1,3 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="users"></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content class="ion-padding">
   <h1 text-center>Afegir nous usuaris</h1>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit($event)">

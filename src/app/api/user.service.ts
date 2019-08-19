@@ -40,6 +40,20 @@ export class UserService {
       })
     );
   }
+  verficarLogin(user: any) {
+    return this._http.post(url+ '/login', user)
+    .pipe(map((data: any) => {
+      if (data.ok){
+        console.log(data.user);
+        this.currentUser = data.user;
+        this.saveLocalStorage(this.currentUser);
+        this.router.navigate(['/deport']);
+      }else {
+        this.alert("El nom o la contrasenya son incorrectes", "Hable con el administrador o intente de nuevo");
+      }
+      console.log(data);
+    }))
+  }
   getTotalUsers(){
     return this._http.get(url +'/users');
   }
@@ -53,8 +67,8 @@ export class UserService {
   saveLocalStorage(user: any){
     if(user){
       let u = {
-        name: user.username,
-        lasname: user.lasname,
+        name: user.name,
+        lastname: user.lastname,
         email: user.email,
         foto: user.img,
         team: user.team
@@ -62,7 +76,7 @@ export class UserService {
       localStorage.setItem("user", JSON.stringify(u));
     }
   }
-  async alert(message: string) {
+  async alert(message: string, sub?: string) {
     let alert = await this.alertCtrl.create({
       header: message,
       subHeader: "Hable con el administrador o intente de nuevo",
