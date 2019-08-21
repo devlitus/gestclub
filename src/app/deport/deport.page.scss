@@ -1,8 +1,14 @@
 ion-button {
   --background-hover: green !important;
   --background-focused: rgb(36, 184, 36) !important;
+  --border-color: green;
   height: 8vh;
   margin: 5vh 1vh;
+  P{
+    font-weight: 800;
+    font-size: 1.2em;
+    color: red;
+  }
 }
 ion-button.bg-hokey {
   --background: null;

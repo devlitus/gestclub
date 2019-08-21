@@ -23,19 +23,7 @@ export class UserService {
     return this._http.get(url + "/users").pipe(
       map((data: any) => {
         if(data.ok){
-          let currenUser = [...data.users];
-          let c = currenUser.filter(u => {
-            if(u.username === user.name && u.password === user.pass){
-              this.currentUser = u;
-              return u;
-            }
-          })
-          if(c.length === 0){
-            this.alert("Usuario Incorrecto!!!");
-          }else{
-            this.saveLocalStorage(this.currentUser);
-            this.router.navigate(['/deport']);
-          }
+          
         }
       })
     );

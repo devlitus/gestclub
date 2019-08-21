@@ -1,3 +1,36 @@
-<p>
-  user-create works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="users"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Actualizar Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <h3 text-center>Actualizar Usuario</h3>
+  <form [formGroup]="acform" (ngSubmit)="onSubmit($event)">
+    <ion-item>
+      <ion-label position="inline">Nom </ion-label>
+      <ion-input  formControlName="username" name="username" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Congnom </ion-label>
+      <ion-input  formControlName="lastname" name="lastname" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Contrasenya </ion-label>
+      <ion-input  formControlName="password" name="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Email</ion-label>
+      <ion-input  formControlName="email" name="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Telèfon</ion-label>
+      <ion-input  formControlName="tel" name="tel" type="number"></ion-input>
+    </ion-item>
+    <ion-button expand="block" color="primary" type="submit" [disabled]="acform.invalid">
+      Actualitza Usuari
+    </ion-button>
+  </form>
+</ion-content>

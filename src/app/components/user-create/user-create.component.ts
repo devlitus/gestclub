@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-create',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(public route: ActivatedRoute) {console.log(this.route.snapshot.paramMap.get('id')); }
+  acform = new FormGroup({
+    username: new FormControl('' ),
+    lastname: new FormControl('' ),
+    password: new FormControl('' ),
+    email: new FormControl('' ),
+    tel: new FormControl('')
+  });
 
   ngOnInit() {}
 

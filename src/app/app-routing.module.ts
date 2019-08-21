@@ -13,6 +13,10 @@ const routes: Routes = [
   { path: 'users', loadChildren: './users/users.module#UsersPageModule' },
   { path: 'users/create/:id', component: UserCreateComponent },
   { path: 'users/add', component: UserAddComponent },
+  { path: 'planning', loadChildren: './planning/planning.module#PlanningPageModule' },
+  { path: 'macro', loadChildren: './macro/macro.module#MacroPageModule' },
+  { path: 'micro', loadChildren: './micro/micro.module#MicroPageModule' },
+  { path: 'session', loadChildren: './session/session.module#SessionPageModule' },
 ];
 
 @NgModule({

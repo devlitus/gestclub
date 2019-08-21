@@ -29,7 +29,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button class="custom-btn" expand="block">
+        <ion-button class="custom-btn" expand="block" [routerLink]="['/team']">
           Gestiona<br /> Equips
         </ion-button>
       </ion-col>
@@ -40,7 +40,7 @@
           class="custom-btn"
           color="success"
           expand="block"
-          
+          [routerLink]="['/planning']"
         >
           Gestiona <br />
           planificacions
@@ -51,7 +51,7 @@
           class="custom-btn"
           color="tertiary"
           expand="block"
-          
+          [routerLink]="['/macro']"
         >
           Gestiona <br />
           macrocicles
@@ -65,7 +65,7 @@
           color="medium"
           color="primary"
           expand="block"
-          
+          [routerLink]="['/micro']"
         >
           Gestiona <br />
           microcicles
@@ -76,7 +76,7 @@
           class="custom-btn"
           color="dark"
           expand="block"
-          
+          [routerLink]="['/session']" 
         >
           Gestiona<br /> sessions
         </ion-button>

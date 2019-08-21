@@ -10,7 +10,7 @@
   <h1 text-center>Afegir nous usuaris</h1>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit($event)">
     <ion-item>
-      <ion-label position="inline">Nom</ion-label>
+      <ion-label position="inline">Nom <ion-text color="danger">*</ion-text></ion-label>
       <ion-input
         formControlName="username"
         name="username"
@@ -23,7 +23,7 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Cognom</ion-label>
+      <ion-label position="inline">Cognom <ion-text color="danger">*</ion-text></ion-label>
       <ion-input
         formControlName="lastname"
         name="lastname"
@@ -36,7 +36,7 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Correo electronic</ion-label>
+      <ion-label position="inline">Correo electronic <ion-text color="danger">*</ion-text></ion-label>
       <ion-input formControlName="email" name="email" type="email"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
@@ -45,7 +45,7 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Contrasenya</ion-label>
+      <ion-label position="inline">Contrasenya <ion-text color="danger">*</ion-text></ion-label>
       <ion-input
         formControlName="password"
         name="password"
@@ -58,7 +58,7 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Telèfon</ion-label>
+      <ion-label position="inline">Telèfon <ion-text color="danger">*</ion-text></ion-label>
       <ion-input formControlName="telf" name="telf" type="tel"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
@@ -67,7 +67,7 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">DNI</ion-label>
+      <ion-label position="inline">DNI <ion-text color="danger">*</ion-text></ion-label>
       <ion-input
         formControlName="dni"
         name="dni"
@@ -81,7 +81,7 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Data de neixament</ion-label>
+      <ion-label position="inline">Data de neixament <ion-text color="danger">*</ion-text></ion-label>
       <ion-input
         formControlName="birthday"
         name="birthday"
