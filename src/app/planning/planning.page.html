@@ -3,10 +3,43 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="management"></ion-back-button>
     </ion-buttons>
-    <ion-title>planning</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClick()">
+        <ion-icon slot="end" name="clipboard"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Planificació</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h2 text-center>1º Catalana</h2>
+  <h4 text-center>Planificació</h4>
+  <form   (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="inline">Data Inici</ion-label>
+      <ion-input name="dataInici" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data Final</ion-label>
+      <ion-input name="dataFinish" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Objectiu Colectiu</ion-label>
+      <ion-input name="objColectiu" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Objectiu Individual</ion-label>
+      <ion-input name="objIndividual" type="text"></ion-input>
+    </ion-item>
+  </form>
 
 </ion-content>
+<ion-footer class="ion-padding">
+  <ion-toolbar>
+    <ion-button class="bg-btn" expand="block" [routerLink]="['/macro']">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Afegir
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detaill equip</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <h2 text-center>1º Catalana</h2>
+  <p text-center>Seleccionar personas per aquest equip</p>
+  <ion-list>
+    <ion-item>
+      <ion-label>Personal</ion-label>
+      <ion-select multiple="true" cancelText="Nah" okText="Okay!" [compareWith]="compareWith">
+        <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-button class="bg-btn" [routerLink]="['/planning']">
+      <ion-icon name="clipboard"></ion-icon>
+    Planificació
+  </ion-button>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill='solid' (click)="onClick()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Afegir
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill='solid' (click)="onClick()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Valoracions
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

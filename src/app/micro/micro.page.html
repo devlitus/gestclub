@@ -1,12 +1,43 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="management"></ion-back-button>
+      <ion-back-button defaultHref="macro"></ion-back-button>
     </ion-buttons>
     <ion-title>micro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <h2 text-center>1º Catalana</h2>
+  <form>
+    <ion-item>
+      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required name="dataInici" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required name="dataFinish" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Materies</ion-label>
+      <ion-select multiple="true" cancelText="Cancel" okText="Ok!" [compareWith]="compareWith"
+        placeholder="Seleccinar Materies">
+        <ion-select-option *ngFor="let m of materies">{{m.nom}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button expand="block" class="bg-btn" [routerLink]="['/session']">
+      Afegir
+      <ion-icon slot="icon-only" name="send"></ion-icon>
+    </ion-button>
+  </form>
 </ion-content>
+<ion-footer class="ion-padding">
+    <ion-toolbar>
+      <ion-button fill="solid" expand="full">
+        <ion-icon slot="end" name="add"></ion-icon>
+        Afegir
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>

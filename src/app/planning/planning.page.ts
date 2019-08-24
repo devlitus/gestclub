@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-planning',
@@ -8,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class PlanningPage implements OnInit {
 
   constructor() { }
-
+  planning =  new FormGroup({
+    dataInit: new FormControl(''),
+    dataFinish: new FormControl(''),
+    objColectiu: new FormControl(''),
+    objIndividual: new FormControl('')
+  })
   ngOnInit() {
   }
 

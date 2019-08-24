@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { UserAddComponent } from './components/user-add/user-add.component';
 import { UserCreateComponent } from './components/user-create/user-create.component';
+import { TeamUpdateComponent } from './components/team-update/team-update.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home/:team/:planning', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'team', loadChildren: './team/team.module#TeamPageModule' },
+  { path: 'team/update/:id', component: TeamUpdateComponent },
   { path: 'deport', loadChildren: './deport/deport.module#DeportPageModule' },
   { path: 'management', loadChildren: './management/management.module#ManagementPageModule' },
   { path: 'users', loadChildren: './users/users.module#UsersPageModule' },

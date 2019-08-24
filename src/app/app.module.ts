@@ -13,17 +13,26 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserAddComponent } from './components/user-add/user-add.component';
 import { UserCreateComponent } from './components/user-create/user-create.component';
+import { TeamPageModule } from './team/team.module';
 
 @NgModule({
-  declarations: [AppComponent, UserAddComponent, UserCreateComponent],
-  entryComponents: [UserAddComponent, UserCreateComponent],
+  declarations: [
+    AppComponent, 
+    UserAddComponent, 
+    UserCreateComponent,
+  ],
+  entryComponents: [
+    UserAddComponent, 
+    UserCreateComponent,
+  ],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TeamPageModule,
   ],
   providers: [
     StatusBar,
