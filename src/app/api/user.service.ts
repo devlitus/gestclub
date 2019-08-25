@@ -43,7 +43,11 @@ export class UserService {
     }))
   }
   getTotalUsers(){
-    return this._http.get(url +'/users');
+    return this._http.get(url +'/users').pipe(map((data: any) => {
+      if(data.ok){
+        return data.users
+      }
+    }));
   }
   insertUser(from: any) {
     return this._http.post(url, from).pipe(

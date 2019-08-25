@@ -15,7 +15,7 @@
 <ion-content>
   <h2 text-center>1º Catalana</h2>
   <h4 text-center>Planificació</h4>
-  <form   (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="inline">Data Inici</ion-label>
       <ion-input name="dataInici" type="date"></ion-input>
@@ -37,7 +37,7 @@
 </ion-content>
 <ion-footer class="ion-padding">
   <ion-toolbar>
-    <ion-button class="bg-btn" expand="block" [routerLink]="['/macro']">
+    <ion-button type="submit" class="bg-btn" expand="block" [routerLink]="['/macro']">
       <ion-icon slot="start" name="add"></ion-icon>
       Afegir
     </ion-button>

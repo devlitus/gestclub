@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TeamPage } from './team.page';
 import { TeamAddComponent } from '../components/team-add/team-add.component';
 import { TeamUpdateComponent } from '../components/team-update/team-update.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

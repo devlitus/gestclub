@@ -1,37 +1,91 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Detaill equip</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-segment (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="camera">
+            <ion-icon name="camera"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="bookmark">
+            <ion-icon name="bookmark"></ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding">
   <h2 text-center>1º Catalana</h2>
   <p text-center>Seleccionar personas per aquest equip</p>
-  <ion-list>
-    <ion-item>
-      <ion-label>Personal</ion-label>
-      <ion-select multiple="true" cancelText="Nah" okText="Okay!" [compareWith]="compareWith">
-        <ion-select-option *ngFor="let user of users">{{user.first + ' ' + user.last}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-button class="bg-btn" [routerLink]="['/planning']">
-      <ion-icon name="clipboard"></ion-icon>
-    Planificació
+  <ion-segment scrollable>
+      <ion-segment-button>
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button checked>
+        <ion-icon name="heart"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button>
+        <ion-icon name="pin"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button>
+        <ion-icon name="star"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button>
+        <ion-icon name="call"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button>
+        <ion-icon name="globe"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button>
+        <ion-icon name="basket"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  <ion-button expand="block" class="bg-btn">
+    <ion-icon slot="end" name="send"></ion-icon>
+    Crear una Planificació
   </ion-button>
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar class="ion-padding">
     <ion-buttons slot="start">
-      <ion-button fill='solid' (click)="onClick()">
+      <ion-button type="submit" fill='solid'>
         <ion-icon slot="start" name="add"></ion-icon>
         Afegir
       </ion-button>
     </ion-buttons>
+
     <ion-buttons slot="end">
-      <ion-button fill='solid' (click)="onClick()">
+      <ion-button fill='solid'>
         <ion-icon slot="start" name="add"></ion-icon>
         Valoracions
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
+<!-- <form #selForm="ngForm" (onSubmit)="onSubmit(selForm)">
+    <ion-item>
+      <ion-label>Personal</ion-label>
+      
+      <ion-select multiple="true" cancelText="Cancelar" okText="Aceptar!" [compareWith]="compareWith">
+        <ion-select-option #sel="ngModel" ngModel name="sel" *ngFor="let user of users" [value]="user">{{user.first + ' ' + user.last}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form> -->
+
+<!-- <ion-virtual-scroll [items]="users" approxItemHeight="20px">
+      <ion-item *virtualItem="let item">
+        <ion-label>{{item.username}}</ion-label>
+      </ion-item>
+    </ion-virtual-scroll> -->
+
+<!-- <ion-row>
+        <ion-col size="12" *ngFor="let user of users">
+          <ion-item>
+            <ion-label>{{user.username}}</ion-label>
+            <ion-checkbox></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Tipo</ion-label>
+            <ion-select multiple="true" placeholder="Select el tipo">
+              <ion-select-option value="jugador">Jugador</ion-select-option>
+              <ion-select-option value="entrenador">Entrenador</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row> -->

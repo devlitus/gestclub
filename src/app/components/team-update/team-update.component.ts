@@ -1,37 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { UserService } from "src/app/api/user.service";
 
 @Component({
-  selector: 'app-team-update',
-  templateUrl: './team-update.component.html',
-  styleUrls: ['./team-update.component.scss'],
+  selector: "app-team-update",
+  templateUrl: "./team-update.component.html",
+  styleUrls: ["./team-update.component.scss"]
 })
 export class TeamUpdateComponent implements OnInit {
-  users: any[] = [
-    {
-      id: 1,
-      first: 'Antonio',
-      last: 'Fernandez',
-    },
-    {
-      id: 2,
-      first: 'Maria',
-      last: 'Perez',
-    },
-    {
-      id: 3,
-      first: 'Julia',
-      last: 'Pujol',
-    }
-  ];
+  users: any[] = [];
+ 
+  constructor(private _server: UserService) {
   
-  constructor() { }
+  }
+  
 
-  ngOnInit() {}
-  compareWithFn = (o1, o2) => {
-    console.log('o1', o1)
-    // console.log('o2', o2)
-    // return o1 && o2 ? o1.id === o2.id : o1 === o2;
-  };
-  
-  compareWith = this.compareWithFn;
+  ngOnInit() {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this._server.getTotalUsers().subscribe(data => {
+      const u = [...data];
+      this.users = u;
+      console.log(this.users)
+    });
+  }
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
+  }
 }
