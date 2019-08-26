@@ -1,91 +1,23 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-segment (ionChange)="segmentChanged($event)">
-          <ion-segment-button value="camera">
-            <ion-icon name="camera"></ion-icon>
-          </ion-segment-button>
-          <ion-segment-button value="bookmark">
-            <ion-icon name="bookmark"></ion-icon>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="team"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Actualizació del Equip</ion-title>
+  </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <h2 text-center>1º Catalana</h2>
-  <p text-center>Seleccionar personas per aquest equip</p>
-  <ion-segment scrollable>
-      <ion-segment-button>
-        <ion-icon name="home"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button checked>
-        <ion-icon name="heart"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button>
-        <ion-icon name="pin"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button>
-        <ion-icon name="star"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button>
-        <ion-icon name="call"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button>
-        <ion-icon name="globe"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button>
-        <ion-icon name="basket"></ion-icon>
-      </ion-segment-button>
-    </ion-segment>
-  <ion-button expand="block" class="bg-btn">
-    <ion-icon slot="end" name="send"></ion-icon>
-    Crear una Planificació
+  <h2 text-center>{{team.name}}</h2>
+  <ion-button expand="block" fill="solid" class="bg-btn" [routerLink]="['/planning', team.id]">
+    <ion-icon slot="start" name="clipboard"></ion-icon>
+    Planificacions
+  </ion-button>
+  <ion-button expand="block" fill="solid" color="tertiary">
+    <ion-icon slot="start" name="clipboard"></ion-icon>
+    Valoracions
+  </ion-button>
+  <ion-button expand="block" fill="solid" color="secondary" [routerLink]="['/team/play', team.id]">
+    <ion-icon slot="start" name="clipboard"></ion-icon>
+    Jugador / Personal
   </ion-button>
 </ion-content>
-<ion-footer>
-  <ion-toolbar class="ion-padding">
-    <ion-buttons slot="start">
-      <ion-button type="submit" fill='solid'>
-        <ion-icon slot="start" name="add"></ion-icon>
-        Afegir
-      </ion-button>
-    </ion-buttons>
-
-    <ion-buttons slot="end">
-      <ion-button fill='solid'>
-        <ion-icon slot="start" name="add"></ion-icon>
-        Valoracions
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
-<!-- <form #selForm="ngForm" (onSubmit)="onSubmit(selForm)">
-    <ion-item>
-      <ion-label>Personal</ion-label>
-      
-      <ion-select multiple="true" cancelText="Cancelar" okText="Aceptar!" [compareWith]="compareWith">
-        <ion-select-option #sel="ngModel" ngModel name="sel" *ngFor="let user of users" [value]="user">{{user.first + ' ' + user.last}}</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </form> -->
-
-<!-- <ion-virtual-scroll [items]="users" approxItemHeight="20px">
-      <ion-item *virtualItem="let item">
-        <ion-label>{{item.username}}</ion-label>
-      </ion-item>
-    </ion-virtual-scroll> -->
-
-<!-- <ion-row>
-        <ion-col size="12" *ngFor="let user of users">
-          <ion-item>
-            <ion-label>{{user.username}}</ion-label>
-            <ion-checkbox></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-label>Tipo</ion-label>
-            <ion-select multiple="true" placeholder="Select el tipo">
-              <ion-select-option value="jugador">Jugador</ion-select-option>
-              <ion-select-option value="entrenador">Entrenador</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row> -->

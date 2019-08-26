@@ -5,9 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TeamPage } from './team.page';
-import { TeamAddComponent } from '../components/team-add/team-add.component';
-import { TeamUpdateComponent } from '../components/team-update/team-update.component';
 import { FormsModule } from '@angular/forms';
+import { TeamUpdateComponent } from '../components/team-update/team-update.component';
+import { TeamPlayComponent } from '../components/team-play/team-play.component';
 
 const routes: Routes = [
   {
@@ -25,12 +25,12 @@ const routes: Routes = [
   ],
   declarations: [
     TeamPage,
-    TeamAddComponent,
-    TeamUpdateComponent
+    TeamUpdateComponent,
+    TeamPlayComponent
   ],
   entryComponents: [
-    TeamAddComponent, 
-    TeamUpdateComponent
-  ],
+    TeamUpdateComponent,
+    TeamPlayComponent
+  ]
 })
 export class TeamPageModule {}

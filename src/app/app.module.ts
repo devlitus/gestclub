@@ -32,7 +32,7 @@ import { TeamPageModule } from './team/team.module';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    TeamPageModule,
+    TeamPageModule
   ],
   providers: [
     StatusBar,

@@ -25,6 +25,14 @@ export class TeamPage implements OnInit {
       this.teams = [...team];
     })
   }
+  deleteItem(item: any){
+    let te = this.teams.filter((t: any) => {
+      if(t.id !== item.id){
+        return t;
+      }
+    })
+    this.teams = te;
+  }
   async alert() {
     const alert = await this.alertCtrl.create({
       header: 'Afegir Equip!',

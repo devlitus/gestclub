@@ -18,20 +18,17 @@ export class UsersPage implements OnInit {
   showUsers(){
     this._serviceUser.getTotalUsers()
     .subscribe((data: any) => {
-      if(data.ok){
-        this.users = [...data.users];
-      }
+      this.users = [...data];
     })
   }
 
   onEdit(item: any){
     console.log(item);
   }
-  onTrash(id: any){
-    this.alert("¿ Segu que vols eliminal ?")
-    console.log(id)
+  onTrash(user: any){
+    this.alert("¿ Segu que vols eliminal ?", user);
   }
-  async alert(message: string){
+  async alert(message: string, user: any){
     const alert = await this.alertCtrl.create({
       header: message,
       subHeader: "Si l'eliminas no podras tornar enrera",
@@ -45,7 +42,13 @@ export class UsersPage implements OnInit {
           text: 'Acepta',
           cssClass: 'success',
           handler: () => {
-            console.log('confirmado')
+            let us = this.users.filter((u: any) => {
+              if(u.id !== user.id){
+                return u
+              }
+            })
+            this.users = us;
+            // console.log('confirmado')
           }
         }
       ]

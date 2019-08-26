@@ -6,17 +6,24 @@
     <ion-title>Gesetió Club</ion-title>
     <ion-buttons slot="end">
       <ion-button fill="clear">
-        <ion-img
-          src="assets/deportes/hockey.svg"
-          style="width: 4vh; height: 4vh;"
-        ></ion-img>
+        <ion-img src="assets/deportes/hockey.svg" style="width: 4vh; height: 4vh;"></ion-img>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-grid>
+  <div class="wrapper">
+    <ion-button class="custom-btn" color="dark" expand="block" [routerLink]="['/users']">
+      Gestiona<br /> Usuaris
+    </ion-button>
+    <ion-button class="custom-btn" expand="block" [routerLink]="['/team']">
+      Gestiona<br /> Equips
+    </ion-button>
+  </div>
+</ion-content>
+
+<!-- <ion-grid>
     <ion-row>
       <ion-col size="6">
         <ion-button
@@ -49,7 +56,7 @@
       <ion-col size="6">
         <ion-button
           class="custom-btn"
-          color="tertiary"
+          color="danger"
           expand="block"
           [routerLink]="['/macro']"
         >
@@ -82,5 +89,4 @@
         </ion-button>
       </ion-col>
     </ion-row>
-  </ion-grid>
-</ion-content>
+  </ion-grid> -->
