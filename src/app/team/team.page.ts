@@ -26,12 +26,8 @@ export class TeamPage implements OnInit {
     })
   }
   deleteItem(item: any){
-    let te = this.teams.filter((t: any) => {
-      if(t.id !== item.id){
-        return t;
-      }
-    })
-    this.teams = te;
+    this.aletDeleter(item);
+    
   }
   async alert() {
     const alert = await this.alertCtrl.create({
@@ -54,12 +50,40 @@ export class TeamPage implements OnInit {
         }, {
           text: 'Ok',
           handler: (name) => {
-            console.log('Confirm Ok', name);
+            if(name !== ''){
+              this.teams.push({'team_name': name});
+            }
           }
         }
       ]
     });
 
     await alert.present();
+  }
+  async aletDeleter(team){
+    const alert = await this.alertCtrl.create({
+      header: '¿ Segu que vols eliminal ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            let te = this.teams.filter((t: any) => {
+              if(t.id !== team.id){
+                return t;
+              }
+            });
+            this.teams = te;
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }
