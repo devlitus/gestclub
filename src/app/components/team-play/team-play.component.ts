@@ -14,9 +14,13 @@ export class TeamPlayComponent implements OnInit {
   checked = true;
   hidden = true;
   users = [];
-  constructor() {}
+  date: any = [];
+  constructor() {this.restarYear();}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+    console.log(this.date)
+  }
   segmentChanged(e: any) {
     if (e.detail.value === "play") {
       this.play = true;
@@ -39,7 +43,10 @@ export class TeamPlayComponent implements OnInit {
       { name: "Jordi Pujol" },
       { name: "Pepe Hernandez" }
     ];
-    console.log(form.valid);
+    console.log(form.value);
+  }
+  onCheck(e){
+    console.log(e);
   }
   onSelect(e: any) {
     if (e.detail.value[0] == 1) {
@@ -71,6 +78,18 @@ export class TeamPlayComponent implements OnInit {
         { name: "Pepe Hernandez" }
       ];
       console.log(e.detail.value);
+    }
+  }
+
+  restarYear(){
+    let cantidad = 1
+    let contador = 25
+    while(contador >= 0){
+      let restaYear = new Date().getFullYear()+1;
+      restaYear = restaYear - cantidad;
+      this.date.push(restaYear);
+      cantidad++;
+      contador--;
     }
   }
 }
