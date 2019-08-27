@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Router } from "@angular/router";
 import { Storage } from '@ionic/storage';
+
 @Injectable({
   providedIn: "root"
 })
@@ -20,10 +21,16 @@ export class UserService {
     ) {}
 
   getUser(user: any) {
-    return this._http.get(url + "/users").pipe(
+    return this._http.get(url + "/users", user).pipe(
       map((data: any) => {
         if(data.ok){
-          
+          const currentUser = [...data.users];
+          const us = currentUser.filter((u: any) => {
+            if(u.id === user){
+              return u;
+            }
+          });
+          return us;
         }
       })
     );
@@ -39,7 +46,6 @@ export class UserService {
       }else {
         this.alert("El nom o la contrasenya son incorrectes", "Hable con el administrador o intente de nuevo");
       }
-      console.log(data);
     }))
   }
   getTotalUsers(){

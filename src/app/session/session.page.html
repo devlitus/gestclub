@@ -1,31 +1,39 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="micro"></ion-back-button>
+      <ion-back-button defaultHref="micro/{{id}}"></ion-back-button>
     </ion-buttons>
     <ion-title>session</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <h2 text-center>1º Catalana</h2>
-    <form>
-      <ion-item>
-        <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required name="dataInici" type="date"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
-        </ion-label>
-        <ion-input required name="dataFinish" type="date"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input type="file" placeholder="Awesome Input"></ion-input>
-      </ion-item>
-      <ion-button expand="block" class="bg-btn">
-        Afegir
-        <ion-icon slot="icon-only" name="send"></ion-icon>
-      </ion-button>
-    </form>
+<ion-content class="ion-padding">
+  <h2 text-center>{{nameTeam}}</h2>
+  <form>
+    <ion-item>
+      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required name="dataInici" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required name="dataFinish" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="file" placeholder="Awesome Input"></ion-input>
+    </ion-item>
+    <ion-button expand="block" class="bg-btn">
+      Afegir
+      <ion-icon slot="end" name="add"></ion-icon>
+    </ion-button>
+  </form>
 </ion-content>
+<ion-footer class="ion-padding">
+  <ion-toolbar>
+    <ion-button expand="block" color="tertiary" (click)="onExercise()">
+      Exercici
+      <ion-icon slot="end" name="send"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

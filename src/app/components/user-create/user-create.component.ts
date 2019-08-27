@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { UserService } from 'src/app/api/user.service';
 
 @Component({
   selector: 'app-user-create',
@@ -8,16 +10,42 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./user-create.component.scss'],
 })
 export class UserCreateComponent implements OnInit {
-
-  constructor(public route: ActivatedRoute) {console.log(this.route.snapshot.paramMap.get('id')); }
-  acform = new FormGroup({
-    username: new FormControl('' ),
-    lastname: new FormControl('' ),
-    password: new FormControl('' ),
-    email: new FormControl('' ),
-    tel: new FormControl('')
-  });
-
-  ngOnInit() {}
-
+  user: any = {};
+  
+  constructor(
+    public route: ActivatedRoute, 
+    public toastCtrl: ToastController,
+    private _service: UserService
+    ) { }
+  
+  ngOnInit() {
+    this.getUser()
+  }
+  getUser(){
+    const id = this.route.snapshot.paramMap.get('id');
+    this._service.getUser(id)
+    .subscribe(data => {
+      this.user = {
+        username: data[0].username,
+        lastname: data[0].lastname,
+        password: data[0].password,
+        email: data[0].email,
+        telf: data[0].telf,
+        team: data[0].team
+      }
+      console.log(data);
+    })
+  }
+  onSubmit(form: NgForm){
+    this.toast();
+    console.log(form.value)
+  }
+  async toast(){
+    const toast  = await this.toastCtrl.create({
+      message: 'Usuari actualitzat correctament !!!!!!',
+      position: 'middle',
+      duration: 2000
+    });
+    toast.present();
+  }
 }

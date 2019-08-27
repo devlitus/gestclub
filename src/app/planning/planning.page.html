@@ -12,34 +12,34 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <h2 text-center>1º Catalana</h2>
-  <h4 text-center>Planificació</h4>
-  <form (ngSubmit)="onSubmit()">
+<ion-content class="ion-padding">
+  <h2 text-center>{{nameTeam}}</h2>
+  <form [formGroup]="planForm" (ngSubmit)="onSubmit($event)">
     <ion-item>
-      <ion-label position="inline">Data Inici</ion-label>
-      <ion-input name="dataInici" type="date"></ion-input>
+      <ion-label position="inline">Data Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dataInit" name="dataInit" type="date" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Data Final</ion-label>
-      <ion-input name="dataFinish" type="date"></ion-input>
+      <ion-label position="inline">Data Final <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dataFinish" name="dataFinish" type="date" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Objectiu Colectiu</ion-label>
-      <ion-input name="objColectiu" type="text"></ion-input>
+      <ion-label position="floating">Objectiu Colectiu <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="objColectiu" name="objColectiu" type="text" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Objectiu Individual</ion-label>
-      <ion-input name="objIndividual" type="text"></ion-input>
+      <ion-label position="floating">Objectiu Individual <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="objIndividual" name="objIndividual" type="text" required></ion-input>
     </ion-item>
+    <ion-button type="submit" class="bg-btn" fill="solid" expand="block">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Afegir Planificació
+    </ion-button>
   </form>
 
 </ion-content>
-<ion-footer class="ion-padding">
-  <ion-toolbar>
-    <ion-button type="submit" class="bg-btn" expand="block" [routerLink]="['/macro']">
-      <ion-icon slot="start" name="add"></ion-icon>
-      Afegir
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>
+<!-- disabled="!planForm.invalid" -->

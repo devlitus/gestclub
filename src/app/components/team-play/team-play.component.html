@@ -1,6 +1,6 @@
 <ion-toolbar>
   <ion-buttons slot="start">
-    <ion-back-button defaultHref="team"></ion-back-button>
+    <ion-back-button defaultHref="team/update/{{id}}"></ion-back-button>
   </ion-buttons>
   <ion-segment (ionChange)="segmentChanged($event)">
     <ion-segment-button #segment value="play" checked="checked">
@@ -47,19 +47,18 @@
       </ion-button>
     </form>
     <ion-list [hidden]="hidden">
-      <form #checkPLay="ngForm" (ngSubmit)="onCheckSubmit(checkPlay)"></form>
+
         <ion-item *ngFor="let user of users">
           <ion-avatar slot="start">
             <img src="assets/icon/user.png" />
           </ion-avatar>
           <ion-label>{{ user.name }}</ion-label>
-          <ion-checkbox slot="end" [(ngModel)]="user" name="user"></ion-checkbox>
+          <ion-checkbox slot="end" name="user" [checked]="isChecked" (ionChange)="onCheck(user.name)"></ion-checkbox>
         </ion-item>
         <ion-button class="bg-btn" type="submit" expand="full" fill="solid">
           <ion-icon slot="end" name="send"></ion-icon>
           Afegir jugadors
         </ion-button>
-      </form>
     </ion-list>
   </div>
   <div *ngIf="otros">
@@ -76,7 +75,7 @@
           <img src="assets/icon/user.png" />
         </ion-avatar>
         <ion-label>{{ user.name }}</ion-label>
-        <ion-checkbox slot="end" [(ngModel)]="user" name="user"></ion-checkbox>
+        <ion-checkbox slot="end" name="user" [checked]="isChecked" (ionChange)="onCheck(user.name)"></ion-checkbox>
       </ion-item>
     </ion-list>
   </div>

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="planning"></ion-back-button>
+      <ion-back-button defaultHref="planning/{{id}}"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="primary">
       <ion-button >
@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-<h2 text-center>1º Catalana</h2>
+<h2 text-center>{{nameTeam}}</h2>
 <form >
   <ion-item>
     <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text></ion-label>
@@ -29,17 +29,18 @@
       <ion-select-option *ngFor="let m of materies">{{m.nom}}</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-button expand="block" class="bg-btn" [routerLink]="['/micro']">
-    Microcicles
-    <ion-icon slot="icon-only" name="send"></ion-icon>
-  </ion-button>
+  <ion-button fill="solid" expand="full" class="bg-btn">
+      <ion-icon slot="end" name="add"></ion-icon>
+      Afegir
+    </ion-button>
 </form>
 </ion-content>
 <ion-footer class="ion-padding">
   <ion-toolbar>
-    <ion-button fill="solid" expand="full">
-      <ion-icon slot="end" name="add"></ion-icon>
-      Afegir
-    </ion-button>
+      <ion-button expand="full" color="tertiary" (click)="onMicro()">
+        <ion-icon slot="end" name="send"></ion-icon>
+        Microcicles
+      </ion-button>
+
   </ion-toolbar>
 </ion-footer>

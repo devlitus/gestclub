@@ -3,19 +3,15 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="users"></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title>Afegir nous usuaris</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <h1 text-center>Afegir nous usuaris</h1>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit($event)">
     <ion-item>
-      <ion-label position="inline">Nom <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        formControlName="username"
-        name="username"
-        type="text"
-      ></ion-input>
+      <ion-label position="inline">Nom <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="username" name="username" type="text"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
       <ion-text color="danger" class="form-error">
@@ -23,12 +19,9 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Cognom <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        formControlName="lastname"
-        name="lastname"
-        type="text"
-      ></ion-input>
+      <ion-label position="inline">Cognom <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="lastname" name="lastname" type="text"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
       <ion-text color="danger" class="form-error">
@@ -36,7 +29,8 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Correo electronic <ion-text color="danger">*</ion-text></ion-label>
+      <ion-label position="inline">Correo electronic <ion-text color="danger">*</ion-text>
+      </ion-label>
       <ion-input formControlName="email" name="email" type="email"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
@@ -45,12 +39,9 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Contrasenya <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        formControlName="password"
-        name="password"
-        type="password"
-      ></ion-input>
+      <ion-label position="inline">Contrasenya <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="password" name="password" type="password"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
       <ion-text color="danger" class="form-error">
@@ -58,7 +49,8 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Telèfon <ion-text color="danger">*</ion-text></ion-label>
+      <ion-label position="inline">Telèfon <ion-text color="danger">*</ion-text>
+      </ion-label>
       <ion-input formControlName="telf" name="telf" type="tel"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
@@ -67,13 +59,9 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">DNI <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        formControlName="dni"
-        name="dni"
-        type="text"
-        placeholder="ej.(12345678D)"
-      ></ion-input>
+      <ion-label position="inline">DNI <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dni" name="dni" type="text" placeholder="ej.(12345678D)"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
       <ion-text color="danger" class="form-error">
@@ -81,27 +69,24 @@
       </ion-text>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Data de neixament <ion-text color="danger">*</ion-text></ion-label>
-      <ion-input
-        formControlName="birthday"
-        name="birthday"
-        type="date"
-      ></ion-input>
+      <ion-label position="inline">Data de neixament <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="birthday" name="birthday" type="date"></ion-input>
     </ion-item>
     <ion-item *ngIf="email.invalid && email.touched" lines="none">
       <ion-text color="danger" class="form-error">
         Please enter a valid email address.
       </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Equip <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="team" name="team" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <input #file type="file" id="fileLoader" name="files" title="Load File" />
     </ion-item>
-    <ion-button
-      type="submit"
-      expand="full"
-      fill="solid"
-      [disabled]="!userForm.valid"
-    >
+    <ion-button class="bg-btn" type="submit" expand="full" fill="solid" [disabled]="!userForm.valid">
       <ion-icon slot="end" name="send"></ion-icon>
       Afegir Usuari
     </ion-button>

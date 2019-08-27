@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { IonSelect } from "@ionic/angular";
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: "app-team-play",
@@ -15,11 +16,12 @@ export class TeamPlayComponent implements OnInit {
   hidden = true;
   users = [];
   date: any = [];
-  constructor() {this.restarYear();}
+  isChecked: boolean;
+  id: any;
+  constructor(public activatedRouter: ActivatedRoute) {}
 
   ngOnInit() {
-    
-    console.log(this.date)
+    this.id = this.activatedRouter.snapshot.paramMap.get('id');
   }
   segmentChanged(e: any) {
     if (e.detail.value === "play") {
@@ -45,8 +47,8 @@ export class TeamPlayComponent implements OnInit {
     ];
     console.log(form.value);
   }
-  onCheck(e){
-    console.log(e);
+  onCheck(user: any){
+    console.log(user);
   }
   onSelect(e: any) {
     if (e.detail.value[0] == 1) {
@@ -80,10 +82,9 @@ export class TeamPlayComponent implements OnInit {
       console.log(e.detail.value);
     }
   }
-
   restarYear(){
     let cantidad = 1
-    let contador = 25
+    let contador = 30
     while(contador >= 0){
       let restaYear = new Date().getFullYear()+1;
       restaYear = restaYear - cantidad;
@@ -93,16 +94,3 @@ export class TeamPlayComponent implements OnInit {
     }
   }
 }
-
-/* else{
-  this.hidden = true;
-}
-if (e.detail.value[0] == 2) {
-  this.hidden = false;
-  this.users =[
-    {name: "Pepeito Perez"},
-    {name: "Jose Pujol"},
-    {name: "Manuel Fernandez"},
-    {name: "Julia Heferson"}
-  ]
-} */

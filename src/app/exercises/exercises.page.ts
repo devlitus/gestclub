@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../api/team.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-session',
-  templateUrl: './session.page.html',
-  styleUrls: ['./session.page.scss'],
+  selector: 'app-exercises',
+  templateUrl: './exercises.page.html',
+  styleUrls: ['./exercises.page.scss'],
 })
-export class SessionPage implements OnInit {
+export class ExercisesPage implements OnInit {
   nameTeam: string;
   id: any
   constructor(
     private _service: TeamService,
-    public router: Router,
     public activatedRoute: ActivatedRoute
-  ) { }
+    ) { }
 
   ngOnInit() {
+    this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.showTeam();
   }
   showTeam() {
@@ -31,8 +32,7 @@ export class SessionPage implements OnInit {
       this.nameTeam = te[0].team_name;
     });
   }
-  onExercise(){
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    this.router.navigate(['exercises/', this.id])
+  onSubmit(form: NgForm){
+
   }
 }

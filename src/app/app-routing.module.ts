@@ -11,16 +11,18 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'team', loadChildren: './team/team.module#TeamPageModule' },
   { path: 'team/update/:id', component: TeamUpdateComponent },
-  { path: 'team/play/:?', component: TeamPlayComponent },
+  { path: 'team/play/:id', component: TeamPlayComponent },
   { path: 'deport', loadChildren: './deport/deport.module#DeportPageModule' },
   { path: 'management', loadChildren: './management/management.module#ManagementPageModule' },
   { path: 'users', loadChildren: './users/users.module#UsersPageModule' },
   { path: 'users/create/:id', component: UserCreateComponent },
   { path: 'users/add', component: UserAddComponent },
-  { path: 'planning/:?', loadChildren: './planning/planning.module#PlanningPageModule' },
-  { path: 'macro', loadChildren: './macro/macro.module#MacroPageModule' },
-  { path: 'micro', loadChildren: './micro/micro.module#MicroPageModule' },
-  { path: 'session', loadChildren: './session/session.module#SessionPageModule' },
+  { path: 'planning/:id', loadChildren: './planning/planning.module#PlanningPageModule' },
+  { path: 'macro/:id', loadChildren: './macro/macro.module#MacroPageModule' },
+  { path: 'micro/:id', loadChildren: './micro/micro.module#MicroPageModule' },
+  { path: 'session/:id', loadChildren: './session/session.module#SessionPageModule' },
+  { path: 'exercises/:id', loadChildren: './exercises/exercises.module#ExercisesPageModule' },
+
 ];
 
 @NgModule({

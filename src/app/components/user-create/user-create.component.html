@@ -8,28 +8,33 @@
 </ion-header>
 <ion-content>
   <h3 text-center>Actualizar Usuario</h3>
-  <form [formGroup]="acform" (ngSubmit)="onSubmit($event)">
+  <form #actForm='ngForm' (ngSubmit)="onSubmit(actFrom)">
     <ion-item>
-      <ion-label position="inline">Nom </ion-label>
-      <ion-input  formControlName="username" name="username" type="text"></ion-input>
+      <ion-label position="floating">Nom </ion-label>
+      <ion-input name="username" type="text" [(ngModel)]="user.username"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Congnom </ion-label>
-      <ion-input  formControlName="lastname" name="lastname" type="text"></ion-input>
+      <ion-label position="floating">Congnom </ion-label>
+      <ion-input name="lastname" type="text" [(ngModel)]="user.lastname"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Contrasenya </ion-label>
-      <ion-input  formControlName="password" name="password" type="password"></ion-input>
+      <ion-label position="floating">Contrasenya </ion-label>
+      <ion-input name="password" type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Email</ion-label>
-      <ion-input  formControlName="email" name="email" type="email"></ion-input>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input name="email" type="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Telèfon</ion-label>
-      <ion-input  formControlName="tel" name="tel" type="number"></ion-input>
+      <ion-label position="floating">Telèfon</ion-label>
+      <ion-input name="tel" type="number" [(ngModel)]="user.telf"></ion-input>
     </ion-item>
-    <ion-button expand="block" color="primary" type="submit" [disabled]="acform.invalid">
+    <ion-item>
+      <ion-label position="floating">Equip</ion-label>
+      <ion-input name="team" type="text" [(ngModel)]="user.team"></ion-input>
+    </ion-item>
+    <ion-button class="bg-btn" expand="block" type="submit">
+      <ion-icon slot="end" name="send"></ion-icon>
       Actualitza Usuari
     </ion-button>
   </form>
