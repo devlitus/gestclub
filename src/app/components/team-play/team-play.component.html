@@ -1,7 +1,12 @@
-<ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-back-button defaultHref="team/update/{{id}}"></ion-back-button>
-  </ion-buttons>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="team/update/{{id}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Afegir al equip</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
   <ion-segment (ionChange)="segmentChanged($event)">
     <ion-segment-button #segment value="play" checked="checked">
       Selecciona jugador
@@ -10,8 +15,6 @@
       Seleccionar altre
     </ion-segment-button>
   </ion-segment>
-</ion-toolbar>
-<ion-content class="ion-padding">
   <div *ngIf="play">
     <p text-center>Filtrar per edad</p>
     <form #play="ngForm" (ngSubmit)="onSubmit(play)">
