@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../api/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-micro',
@@ -10,18 +11,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MicroPage implements OnInit {
   nameTeam: string;
   id: any;
+  namePlanning = localStorage.getItem('p');
+  nameMacro = localStorage.getItem('ma');
+  micros: any[] = []; 
   materies = [
     {
       id: 1,
-      nom: 'fisica'
+      nom: 'Motivació'
     },
     {
       id:2,
-      nom: 'relacionades macros'
+      nom: 'Compromís'
     },
     {
       id: 3,
-      nom: 'ni puta idea'
+      nom: 'Aspiracions'
     }
   
   ]
@@ -33,6 +37,7 @@ export class MicroPage implements OnInit {
   ngOnInit() {
     this.showTeam()
   }
+  
   compareWithfn(item){  
     console.log(item);
   }
@@ -48,6 +53,18 @@ export class MicroPage implements OnInit {
       });
       this.nameTeam = te[0].team_name;
     });
+  }
+  microForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    dataInit: new FormControl('', Validators.required),
+    dataFinish: new FormControl('', Validators.required)
+  })
+  onSubmit(e: any){
+    let micro = {
+      name: this.microForm.value.name
+    }
+    this.micros.push(micro);
+    localStorage.setItem('mi', this.microForm.value.name);
   }
   onSession(){
     this.id =this.activatedRoute.snapshot.paramMap.get("id");

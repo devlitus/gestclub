@@ -11,13 +11,13 @@
   <h2 text-center>Llistat d'equips</h2>
   <ion-list lines="full" *ngFor="let team of teams">
     <ion-item-sliding>
-      <ion-item>
+      <ion-item [routerLink]="['/team/update/', team.id]">
         <ion-label>
           <h2>{{team.team_name}}</h2>
         </ion-label>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option [routerLink]="['/team/update/', team.id]">
+        <ion-item-option >
           Editar
           <ion-icon slot="end" name="create" ></ion-icon>
         </ion-item-option>

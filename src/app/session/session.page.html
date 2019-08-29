@@ -3,37 +3,42 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="micro/{{id}}"></ion-back-button>
     </ion-buttons>
-    <ion-title>session</ion-title>
+    <ion-title>{{planificacio}}</ion-title>
+    <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{nameTeam}}</ion-badge>
+    <ion-badge slot="end" color="secondary" mode="md" style="margin-right: 15px">{{nameMacro}}</ion-badge>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2 text-center>{{nameTeam}}</h2>
-  <form>
+  <h2 text-center>{{nameMicro}}</h2>
+  <p>Afegir noves sessions</p>
+  <form [formGroup]="sessionForm" (ngSubmit)="onSubmit($event)">
+    <ion-item>
+      <ion-label position="floating">Nom de la Sessió <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input  formControlName="name" name="name" type="text" required></ion-input>
+    </ion-item>
     <ion-item>
       <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input required name="dataInici" type="date"></ion-input>
+      <ion-input formControlName="dataInit" name="dataInit" type="date" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input required name="dataFinish" type="date"></ion-input>
+      <ion-input formControlName="dataFinish" name="dataFinish" type="date" required></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-input type="file" placeholder="Awesome Input"></ion-input>
-    </ion-item>
-    <ion-button expand="block" class="bg-btn">
+    <!-- <ion-item>
+      <ion-input type="file"></ion-input>
+    </ion-item> -->
+    <ion-button expand="block" type="submit" class="bg-btn">
       Afegir
       <ion-icon slot="end" name="add"></ion-icon>
     </ion-button>
   </form>
+  <ion-list *ngIf="session">
+    <ion-item *ngFor="let se of session" (click)="onExercise()">
+      <ion-label>{{se.name}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
-<ion-footer class="ion-padding">
-  <ion-toolbar>
-    <ion-button expand="block" color="tertiary" (click)="onExercise()">
-      Exercici
-      <ion-icon slot="end" name="send"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>

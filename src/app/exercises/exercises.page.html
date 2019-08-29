@@ -3,12 +3,18 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="session/{{id}}"></ion-back-button>
     </ion-buttons>
-    <ion-title>Nous Exercicis</ion-title>
+    <ion-title>{{planificacio}}</ion-title>
+    <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{nameTeam}}</ion-badge>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+    <ion-badge  color="primary" mode="md" style="margin-right: 15px">{{macro}}</ion-badge>
+    <ion-badge  color="secondary" mode="md" style="margin-right: 15px">{{micro}}</ion-badge>
+    <ion-badge  color="tertiary" mode="md" style="margin-right: 15px">{{sessio}}</ion-badge>
   <h2 text-center>{{nameTeam}}</h2>
+  <p>Afegir nous execicis</p>
   <form #exeForm="ngForm" (ngSubmit)="onSubmit(exeForm)">
     <ion-item>
       <ion-label>Materia <ion-text color="danger">*</ion-text></ion-label>

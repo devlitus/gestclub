@@ -11,6 +11,10 @@ import { NgForm } from '@angular/forms';
 export class ExercisesPage implements OnInit {
   nameTeam: string;
   id: any
+  planificacio: any = localStorage.getItem('p');
+  macro = localStorage.getItem('ma');
+  micro = localStorage.getItem('mi');
+  sessio = localStorage.getItem('se');
   constructor(
     private _service: TeamService,
     public activatedRoute: ActivatedRoute

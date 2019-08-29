@@ -21,6 +21,7 @@ export class TeamPlayComponent implements OnInit {
   constructor(public activatedRouter: ActivatedRoute) {}
 
   ngOnInit() {
+    this.restarYear();
     this.id = this.activatedRouter.snapshot.paramMap.get('id');
   }
   segmentChanged(e: any) {

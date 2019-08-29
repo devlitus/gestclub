@@ -27,7 +27,6 @@ export class TeamPage implements OnInit {
   }
   deleteItem(item: any){
     this.aletDeleter(item);
-    
   }
   async alert() {
     const alert = await this.alertCtrl.create({

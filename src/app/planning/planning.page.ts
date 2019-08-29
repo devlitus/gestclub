@@ -12,6 +12,7 @@ import { TeamService } from "../api/team.service";
 export class PlanningPage implements OnInit {
   disabled: boolean = true;
   nameTeam: string;
+  planning: any[] = [];
   id: any;
   constructor(
     public router: Router,
@@ -20,6 +21,7 @@ export class PlanningPage implements OnInit {
     private _service: TeamService
   ) {}
   planForm = new FormGroup({
+    name: new FormControl("", [Validators.required]),
     dataInit: new FormControl("", [Validators.required]),
     dataFinish: new FormControl("", [Validators.required]),
     objColectiu: new FormControl("", [Validators.required]),
@@ -44,7 +46,11 @@ export class PlanningPage implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.planForm.valid) {
       this.disabled = false;
-      this.toast("planificació creada correctament");
+      localStorage.setItem('p', this.planForm.value.name);
+      this.planning.push({
+        name: this.planForm.value.name
+      })
+      // this.toast("planificació creada correctament");
       this.router.navigate(["/macro/", this.id]);
     } else {
       this.toast("Tots el camps han de ser omplerts");

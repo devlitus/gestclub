@@ -20,7 +20,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    FormsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [PlanningPage]

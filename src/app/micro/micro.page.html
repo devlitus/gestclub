@@ -3,22 +3,29 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="macro/{{id}}"></ion-back-button>
     </ion-buttons>
-    <ion-title>micro</ion-title>
+    <ion-title>{{namePlanning}}</ion-title>
+    <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{nameTeam}}</ion-badge>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2 text-center>{{nameTeam}}</h2>
-  <form>
+  <h2 text-center>{{nameMacro}}</h2>
+  <form [formGroup]="microForm" (ngSubmit)="onSubmit($event)">
+    <p>Afegir un nou microcicle</p>
     <ion-item>
-      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      <ion-label position="floating">Nom Microcicle <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input required name="dataInici" type="date"></ion-input>
+      <ion-input formControlName="name" required name="name" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input required name="dataFinish" type="date"></ion-input>
+      <ion-input formControlName="dataInit" required name="dataInit" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dataFinish" required name="dataFinish" type="date"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Materies</ion-label>
@@ -27,17 +34,14 @@
         <ion-select-option *ngFor="let m of materies">{{m.nom}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-button fill="solid" expand="full" class="bg-btn">
+    <ion-button fill="solid" type="submit" expand="full" class="bg-btn">
       <ion-icon slot="end" name="add"></ion-icon>
       Afegir
     </ion-button>
   </form>
+  <ion-list *ngIf="micros">
+    <ion-item *ngFor="let mi of micros" (click)="onSession()">
+      <ion-label>{{mi.name}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
-<ion-footer class="ion-padding">
-  <ion-toolbar>
-    <ion-button expand="block" color="tertiary" (click)="onSession()">
-      Sessions
-      <ion-icon slot="end" name="send"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>

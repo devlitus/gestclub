@@ -22,9 +22,7 @@
               <ion-label position="floating">Data d'inici <ion-text color="danger">*</ion-text>
               </ion-label>
               <ion-select placeholder="Data" name="dataInit" [(ngModel)]="dataInit">
-                <ion-select-option *ngFor="let d of date" [value]="d">{{
-                  d
-                }}</ion-select-option>
+                <ion-select-option *ngFor="let d of date" [value]="d">{{d}}</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-item>
@@ -34,9 +32,7 @@
             <ion-label position="floating">Data de final <ion-text color="danger">*</ion-text>
             </ion-label>
             <ion-select placeholder="Data" [(ngModel)]="dataFinish" name="dataFinish">
-              <ion-select-option *ngFor="let d of date" [value]="d">{{
-                d
-              }}</ion-select-option>
+              <ion-select-option *ngFor="let d of date" [value]="d">{{d}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -47,18 +43,17 @@
       </ion-button>
     </form>
     <ion-list [hidden]="hidden">
-
-        <ion-item *ngFor="let user of users">
-          <ion-avatar slot="start">
-            <img src="assets/icon/user.png" />
-          </ion-avatar>
-          <ion-label>{{ user.name }}</ion-label>
-          <ion-checkbox slot="end" name="user" [checked]="isChecked" (ionChange)="onCheck(user.name)"></ion-checkbox>
-        </ion-item>
-        <ion-button class="bg-btn" type="submit" expand="full" fill="solid">
-          <ion-icon slot="end" name="send"></ion-icon>
-          Afegir jugadors
-        </ion-button>
+      <ion-item *ngFor="let user of users">
+        <ion-avatar slot="start">
+          <img src="assets/icon/user.png" />
+        </ion-avatar>
+        <ion-label>{{ user.name }}</ion-label>
+        <ion-checkbox slot="end" name="user" [checked]="isChecked" (ionChange)="onCheck(user.name)"></ion-checkbox>
+      </ion-item>
+      <ion-button class="bg-btn" type="submit" expand="full" fill="solid">
+        <ion-icon slot="end" name="send"></ion-icon>
+        Afegir jugadors
+      </ion-button>
     </ion-list>
   </div>
   <div *ngIf="otros">
