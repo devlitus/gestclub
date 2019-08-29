@@ -11,7 +11,7 @@ import { UserService } from 'src/app/api/user.service';
 })
 export class UserCreateComponent implements OnInit {
   user: any = {};
-  
+  actForm: NgForm;
   constructor(
     public route: ActivatedRoute, 
     public toastCtrl: ToastController,
@@ -36,9 +36,9 @@ export class UserCreateComponent implements OnInit {
       console.log(data);
     })
   }
-  onSubmit(form: NgForm){
+  onSubmit(actForm: NgForm){
     this.toast();
-    console.log(form.value)
+    console.log(actForm.value)
   }
   async toast(){
     const toast  = await this.toastCtrl.create({

@@ -12,7 +12,8 @@ import { async } from '@angular/core/testing';
 })
 export class UserAddComponent implements OnInit {
   email = {
-    invalid: false
+    invalid: false,
+    touched: false
   }
 
   constructor(private _service: UserService, public tosatCtrl: ToastController) { }

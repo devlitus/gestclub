@@ -42,7 +42,7 @@ export class PlanningPage implements OnInit {
       this.nameTeam = te[0].team_name;
     });
   }
-  onSubmit() {
+  onSubmit(e: any) {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.planForm.valid) {
       this.disabled = false;

@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content>
   <h3 text-center>Actualizar Usuario</h3>
-  <form #actForm='ngForm' (ngSubmit)="onSubmit(actFrom)">
+  <form #actForm="ngForm" (ngSubmit)="onSubmit(actForm)">
     <ion-item>
       <ion-label position="floating">Nom </ion-label>
       <ion-input name="username" type="text" [(ngModel)]="user.username"></ion-input>

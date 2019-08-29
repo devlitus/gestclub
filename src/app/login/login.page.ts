@@ -11,7 +11,8 @@ import { UserService } from "../api/user.service";
 })
 export class LoginPage implements OnInit {
   constructor(private _service: UserService, public alertCtrl: AlertController,) {}
-
+  name: any;
+  pass: any;
   ngOnInit() {}
   onSubmit(form: NgForm) {
     if (
