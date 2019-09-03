@@ -15,10 +15,12 @@ export class UsersPage implements OnInit {
   ngOnInit() {
     this.showUsers();
   }
+  
   showUsers(){
     this._serviceUser.getTotalUsers()
     .subscribe((data: any) => {
       this.users = [...data];
+      console.log(this.users);
     })
   }
 

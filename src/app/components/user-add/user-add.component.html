@@ -59,6 +59,16 @@
       </ion-text>
     </ion-item>
     <ion-item>
+      <ion-label position="inline">Direcció <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="address" name="address" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="email.invalid && email.touched" lines="none">
+      <ion-text color="danger" class="form-error">
+        Please enter a valid email address.
+      </ion-text>
+    </ion-item>
+    <ion-item>
       <ion-label position="inline">DNI <ion-text color="danger">*</ion-text>
       </ion-label>
       <ion-input formControlName="dni" name="dni" type="text" placeholder="ej.(12345678D)"></ion-input>
@@ -77,11 +87,6 @@
       <ion-text color="danger" class="form-error">
         Please enter a valid email address.
       </ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label position="inline">Equip <ion-text color="danger">*</ion-text>
-      </ion-label>
-      <ion-input formControlName="team" name="team" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <input #file type="file" id="fileLoader" name="files" title="Load File" />

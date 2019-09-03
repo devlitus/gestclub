@@ -1,58 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { from } from 'rxjs';
-import { UserService } from 'src/app/api/user.service';
-import { ToastController } from '@ionic/angular';
-import { async } from '@angular/core/testing';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { UserService } from "src/app/api/user.service";
 
 @Component({
-  selector: 'app-user-add',
-  templateUrl: './user-add.component.html',
-  styleUrls: ['./user-add.component.scss'],
+  selector: "app-user-add",
+  templateUrl: "./user-add.component.html",
+  styleUrls: ["./user-add.component.scss"]
 })
 export class UserAddComponent implements OnInit {
   email = {
     invalid: false
-  }
+  };
 
-  constructor(private _service: UserService, public tosatCtrl: ToastController) { }
+  constructor(private _service: UserService) {}
   userForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
-    email: new FormControl('',[Validators.email]),
-    password: new FormControl('', Validators.required),
-    telf: new FormControl(''),
-    dni: new FormControl('', Validators.required),
-    birthday: new FormControl(''),
-    team: new FormControl('')
-  })
+    username: new FormControl("", Validators.required),
+    lastname: new FormControl("", Validators.required),
+    email: new FormControl("", [Validators.email]),
+    password: new FormControl("", Validators.required),
+    telf: new FormControl(""),
+    address: new FormControl(""),
+    dni: new FormControl("", Validators.required),
+    birthday: new FormControl(""),
+    tipo: new FormControl("")
+  });
   ngOnInit() {}
   onSubmit(e: any) {
-    if(this.userForm.valid){
+    if (this.userForm.valid) {
       const user = this.userForm.value;
       const form = new FormData();
-      form.append('username', user.username); 
-      form.append('lastname', user.lastname); 
-      form.append('email', user.email); 
-      form.append('password', user.password); 
-      form.append('telf', user.telf);
-      form.append('dni', user.dni);
-      form.append('birthday', user.birthday);
-      form.append('team', user.team);
-      form.append('img', e.target.files.files[0]);
+      form.append("username", user.username);
+      form.append("lastname", user.lastname);
+      form.append("email", user.email);
+      form.append("password", user.password);
+      form.append("telf", user.telf);
+      form.append("address", user.address);
+      form.append("dni", user.dni);
+      form.append("birthday", user.birthday);
+      form.append("img", e.target.files.files[0]);
       this._service.insertUser(form).subscribe();
-      this.toast("Usuari insertat correctament");
-      console.warn(form);
+      this.userForm.reset();
     }
-    
-  }
-  async toast(message: string){
-    const toast = await this.tosatCtrl.create({
-      message: message,
-      position: 'middle',
-      duration: 2000
-    });
-    await toast.present();
   }
 }
 // form.append('imagen', event.target.imagen.files[0]);

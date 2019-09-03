@@ -11,19 +11,15 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { UserAddComponent } from './components/user-add/user-add.component';
-import { UserCreateComponent } from './components/user-create/user-create.component';
 import { TeamPageModule } from './team/team.module';
+import { RatingsPageModule } from './ratings/ratings.module';
+import { UsersPageModule } from './users/users.module';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    UserAddComponent, 
-    UserCreateComponent,
   ],
   entryComponents: [
-    UserAddComponent, 
-    UserCreateComponent,
   ],
   imports: [
     BrowserModule, 
@@ -33,7 +29,9 @@ import { TeamPageModule } from './team/team.module';
     HttpClientModule,
     ReactiveFormsModule,
     TeamPageModule,
-    FormsModule
+    UsersPageModule,
+    FormsModule,
+    RatingsPageModule
   ],
   providers: [
     StatusBar,

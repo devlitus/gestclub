@@ -4,6 +4,7 @@ import { UserAddComponent } from './components/user-add/user-add.component';
 import { UserCreateComponent } from './components/user-create/user-create.component';
 import { TeamUpdateComponent } from './components/team-update/team-update.component';
 import { TeamPlayComponent } from './components/team-play/team-play.component';
+import { RatingDetailComponent } from './components/rating-detail/rating-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,6 +23,9 @@ const routes: Routes = [
   { path: 'micro/:id', loadChildren: './micro/micro.module#MicroPageModule' },
   { path: 'session/:id', loadChildren: './session/session.module#SessionPageModule' },
   { path: 'exercises/:id', loadChildren: './exercises/exercises.module#ExercisesPageModule' },
+  { path: 'ratings', loadChildren: './ratings/ratings.module#RatingsPageModule' },
+  { path: 'ratings/detail/:id', component: RatingDetailComponent },
+
 
 ];
 

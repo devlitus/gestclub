@@ -2,9 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { url } from "../config/config";
 import { map } from "rxjs/operators";
-import { AlertController, LoadingController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  ToastController
+} from "@ionic/angular";
 import { Router } from "@angular/router";
-import { Storage } from '@ionic/storage';
+import { Storage } from "@ionic/storage";
 
 @Injectable({
   providedIn: "root"
@@ -13,73 +17,91 @@ export class UserService {
   public currentUser: any = {};
 
   constructor(
-    private _http: HttpClient, 
+    private _http: HttpClient,
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     public router: Router,
-    private storage: Storage
-    ) {}
-
-  getUser(user: any) {
-    return this._http.get(url + "/users", user).pipe(
+    private storage: Storage,
+    public tosatCtrl: ToastController
+  ) {}
+  getTotalUsers() {
+    return this._http.get(`${url}/users`).pipe(
       map((data: any) => {
-        if(data.ok){
-          const currentUser = [...data.users];
-          const us = currentUser.filter((u: any) => {
-            if(u.id === user){
-              return u;
-            }
-          });
-          return us;
+        if (data.ok) {
+          return data.users;
+        }
+      })
+    );
+  }
+  detailUser(id: any) {
+    return this._http.post(`${url}/detail_user`, { id: id }).pipe(
+      map((data: any) => {
+        if (data.ok) {
+          return data.user;
         }
       })
     );
   }
   verficarLogin(user: any) {
-    return this._http.post(url+ '/login', user)
-    .pipe(map((data: any) => {
-      if (data.ok){
-        console.log(data.user);
-        this.currentUser = data.user;
-        this.saveLocalStorage(this.currentUser);
-        this.router.navigate(['/deport']);
-      }else {
-        this.alert("El nom o la contrasenya son incorrectes", "Hable con el administrador o intente de nuevo");
-      }
-    }))
+    return this._http.post(`${url}/login`, user).pipe(
+      map((data: any) => {
+        if (data.ok) {
+          this.currentUser = data.user;
+          this.saveLocalStorage(this.currentUser);
+          this.router.navigate(["/deport"]);
+        } else {
+          this.alert(
+            "El nom o la contrasenya son incorrectes",
+            "Parla-ho amb el administrado o intenta-ho de nou"
+          );
+        }
+      })
+    );
   }
-  getTotalUsers(){
-    return this._http.get(url +'/users').pipe(map((data: any) => {
-      if(data.ok){
-        return data.users
-      }
-    }));
+
+  insertUser(form: any) {
+    return this._http.post(`${url}/insert_user`, form).pipe(
+      map((data: any) => {
+        console.log(data);
+        if (data.ok) {
+          this.toast(data.message);
+        }
+      })
+    );
   }
-  insertUser(from: any) {
-    return this._http.post(url, from).pipe(
+  updateUser(user: any) {
+    return this._http.post(`${url}/update_user`, user).pipe(
       map((data: any) => {
         console.log(data);
       })
-    )
+    );
   }
-  saveLocalStorage(user: any){
-    if(user){
+  saveLocalStorage(user: any) {
+    if (user) {
       let u = {
         name: user.name,
         lastname: user.lastname,
         email: user.email,
         foto: user.img,
         team: user.team
-      }
+      };
       localStorage.setItem("user", JSON.stringify(u));
     }
   }
   async alert(message: string, sub?: string) {
     let alert = await this.alertCtrl.create({
       header: message,
-      subHeader: "Hable con el administrador o intente de nuevo",
+      subHeader: sub,
       buttons: ["Aceptar"]
     });
     await alert.present();
+  }
+  async toast(message: string) {
+    const toast = await this.tosatCtrl.create({
+      message: message,
+      position: "middle",
+      duration: 2000
+    });
+    await toast.present();
   }
 }
