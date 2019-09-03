@@ -15,7 +15,9 @@ export class UsersPage implements OnInit {
   ngOnInit() {
     this.showUsers();
   }
-  
+  ionViewDidEnter() {
+    this.showUsers();
+  }
   showUsers(){
     this._serviceUser.getTotalUsers()
     .subscribe((data: any) => {

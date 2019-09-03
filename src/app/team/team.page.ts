@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamService } from '../api/team.service';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { isNullOrUndefined } from 'util';
+import { TeamService } from '../api/team.service';
 
 @Component({
   selector: 'app-team',
@@ -21,12 +22,24 @@ export class TeamPage implements OnInit {
   }
   showTeam(){
     this._serviceTeam.getTeam().subscribe(team => {
-      let currenUser = JSON.parse(localStorage.getItem("user"));
       this.teams = [...team];
     })
   }
-  deleteItem(item: any){
-    this.aletDeleter(item);
+  insertTeam(team: any){
+    if(!isNullOrUndefined(team)){
+      this._serviceTeam.insertTeam(team).subscribe();
+      setTimeout(() => {
+        this.showTeam()
+      }, 1000);
+    }else {
+      this.alert();
+    }
+  }
+  deleteTeam(item: any){
+    this._serviceTeam.deleteTeam(item).subscribe();
+    setTimeout(() => {
+      this.showTeam()
+    }, 1000);
   }
   async alert() {
     const alert = await this.alertCtrl.create({
@@ -35,7 +48,7 @@ export class TeamPage implements OnInit {
         {
           name: 'team',
           type: 'text',
-          placeholder: 'Nom del Equip'
+          placeholder: 'El nom del Equip'
         }
       ],
       buttons: [
@@ -48,18 +61,15 @@ export class TeamPage implements OnInit {
           }
         }, {
           text: 'Ok',
-          handler: (name) => {
-            if(name !== ''){
-              this.teams.push({'team_name': name});
-            }
+          handler: (team) => {
+            this.insertTeam(team);
           }
         }
       ]
     });
-
     await alert.present();
   }
-  async aletDeleter(team){
+  async alertDeleter(team: any){
     const alert = await this.alertCtrl.create({
       header: '¿ Segu que vols eliminal ?',
       buttons: [
@@ -73,16 +83,20 @@ export class TeamPage implements OnInit {
         }, {
           text: 'Ok',
           handler: () => {
-            let te = this.teams.filter((t: any) => {
-              if(t.id !== team.id){
-                return t;
-              }
-            });
-            this.teams = te;
+            this.deleteTeam(team);
           }
         }
       ]
     });
     alert.present();
   }
+  ionRefresh(event) {
+    console.log('Pull Event Triggered!');
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.showTeam()
+      //complete()  signify that the refreshing has completed and to close the refresher
+      event.target.complete();
+    }, 1000);
+}
 }
