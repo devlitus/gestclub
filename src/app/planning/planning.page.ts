@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastController } from "@ionic/angular";
 import { TeamService } from "../api/team.service";
+import { PlanningService } from '../api/planning.service';
 
 @Component({
   selector: "app-planning",
@@ -13,19 +14,20 @@ export class PlanningPage implements OnInit {
   disabled: boolean = true;
   nameTeam: string;
   planning: any[] = [];
-  id: any;
+  id_team: any;
   constructor(
     public router: Router,
     public toastCtrl: ToastController,
     public activatedRoute: ActivatedRoute,
-    private _service: TeamService
+    private _service: TeamService,
+    private _service_Pla: PlanningService
   ) {}
   planForm = new FormGroup({
-    name: new FormControl("", [Validators.required]),
+    planning: new FormControl("", [Validators.required]),
     dataInit: new FormControl("", [Validators.required]),
     dataFinish: new FormControl("", [Validators.required]),
-    objColectiu: new FormControl("", [Validators.required]),
-    objIndividual: new FormControl("", [Validators.required])
+    objColectiu: new FormControl(""),
+    objIndividual: new FormControl("")
   });
   ngOnInit() {
     this.showTeam();
@@ -39,23 +41,24 @@ export class PlanningPage implements OnInit {
           return t;
         }
       });
-      this.nameTeam = te[0].team_name;
+      this.nameTeam = te[0].team;
     });
   }
   onSubmit() {
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.id_team = this.activatedRoute.snapshot.paramMap.get("id");
     if (this.planForm.valid) {
-      this.disabled = false;
-      localStorage.setItem('p', this.planForm.value.name);
-      this.planning.push({
-        name: this.planForm.value.name
-      })
+      let planning = {
+        planning: this.planForm.value.planning,
+        data_init: this.planForm.value.dataInit,
+        data_finish: this.planForm.value.dataFinish,
+        id: this.id_team
+      }
+      this._service_Pla.insertPlanning(planning).subscribe();
       // this.toast("planificació creada correctament");
-      this.router.navigate(["/macro/", this.id]);
+      this.router.navigate(["/macro/", this.id_team]);
     } else {
       this.toast("Tots el camps han de ser omplerts");
     }
-    console.warn(this.planForm.valid);
   }
   async toast(message: string) {
     const toast = await this.toastCtrl.create({
