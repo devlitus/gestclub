@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="management"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClick()">
+        <ion-icon slot="end" name="clipboard"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Planificació</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 text-center>{{nameTeam}}</h2>
+  <form [formGroup]="planForm" (ngSubmit)="onSubmit($event)">
+      <ion-item>
+          <ion-label position="floating">Nom de la Planificació <ion-text color="danger">*</ion-text>
+          </ion-label>
+          <ion-input formControlName="planning" name="planning" type="text" required></ion-input>
+        </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dataInit" name="dataInit" type="date" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data Final <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dataFinish" name="dataFinish" type="date" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Objectiu Colectiu <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="objColectiu" name="objColectiu" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Objectiu Individual <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="objIndividual" name="objIndividual" type="text"></ion-input>
+    </ion-item>
+    <ion-button type="submit" class="bg-btn" fill="solid" expand="block">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Afegir Planificació
+    </ion-button>
+  </form>
+  <ion-list *ngIf="namePlanning">
+    <ion-text color="">
+      <p>Llista de las planificacion d'equest equip</p>
+    </ion-text>
+    <ion-item (click)="onMacro()">
+      <ion-label>{{namePlanning}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<!-- disabled="!planForm.invalid" -->

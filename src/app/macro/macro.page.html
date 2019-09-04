@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="planning"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="end" name="calendar"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ currentPlanning.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 text-center>{{ currentTeam.name }}</h2>
+  <p>Afegir nous macrocicles</p>
+  <form [formGroup]="macroForm" (ngSubmit)="onSubmit($event)">
+    <ion-item>
+      <ion-label position="floating">Nom Macrocicle <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="name" required name="name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dataInit" required name="dataInit" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dataFinish" required name="dataFinish" type="date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Materies</ion-label>
+      <ion-select formControlName="materies" name="materies" multiple="true" cancelText="Cancel" okText="Ok!"
+        placeholder="Seleccinar Materies">
+        <ion-select-option value="psicologia">psicologia</ion-select-option>
+        <ion-select-option value="FISIC">FISIC</ion-select-option>
+        <ion-select-option value="TECNIC PATI">TECNIC PATI</ion-select-option>
+        <ion-select-option value="TECNIC STICK">TECNIC STICK</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button fill="solid" type="submit" expand="full" class="bg-btn">
+      <ion-icon slot="end" name="add"></ion-icon>
+      Afegir
+    </ion-button>
+  </form>
+  <ion-list *ngIf="macros">
+    <ion-item *ngFor="let m of macros" (click)="onMicro(m)">
+      <ion-label>{{ m.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

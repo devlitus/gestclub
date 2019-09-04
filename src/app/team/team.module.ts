@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
 import { TeamPage } from './team.page';
+import { FormsModule } from '@angular/forms';
+import { TeamUpdateComponent } from '../components/team-update/team-update.component';
+import { TeamPlayComponent } from '../components/team-play/team-play.component';
 
 const routes: Routes = [
   {
@@ -17,10 +19,18 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [TeamPage]
+  declarations: [
+    TeamPage,
+    TeamUpdateComponent,
+    TeamPlayComponent
+  ],
+  entryComponents: [
+    TeamUpdateComponent,
+    TeamPlayComponent
+  ]
 })
 export class TeamPageModule {}

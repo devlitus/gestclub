@@ -1,0 +1,47 @@
+ion-button {
+  --background-hover: rgb(0, 30, 128) !important;
+  --background-focused: rgb(36, 184, 36) !important;
+  --border-color: green;
+  height: 8vh;
+  margin: 5vh 1vh;
+  P{
+    font-weight: bold;
+    font-size: 1.7em;
+    color: rgb(255, 0, 0);
+  }
+}
+ion-button.bg-hokey {
+  --background: null;
+  background-image: url('/assets/deportes/hockey.svg'), url('/assets/deportes/hockey.svg');
+  background-position-x: 1em, 20em;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+ion-button.bg-football {
+  --background: null;
+  background-image: url('/assets/deportes/football.svg'), url('/assets/deportes/football.svg');
+  background-position-x: 1em, 20em;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+ion-button.bg-basketball {
+  --background: null;
+  background-image: url('/assets/deportes/basketball.svg'), url('/assets/deportes/basketball.svg');
+  background-position-x: 1em, 20em;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+ion-button.bg-atletismo {
+  --background: null;
+  background-image: url('/assets/deportes/atletismo.svg'), url('/assets/deportes/atletismo.svg');
+  background-position-x: 1em, 20em;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+ion-button.bg-tennis {
+  --background: null;
+  background-image: url('/assets/deportes/tennis.svg'), url('/assets/deportes/tennis.svg');
+  background-position-x: 1em, 20em;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

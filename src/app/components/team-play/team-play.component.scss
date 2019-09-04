@@ -1,0 +1,10 @@
+.bg-btn{
+  margin: 3vh;
+  --background: green;
+}
+ion-list.list-md {
+  background: tvar(--ion-item-background,var(--ion-background-color));
+}
+ion-item {
+  opacity: .7;
+}

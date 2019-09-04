@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="team/update"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Valoració del jugadors</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h2 text-center>Llista del jugadors a valora</h2>
+<ion-list>
+  <ion-item *ngFor="let user of users" [routerLink]="['/ratings/detail', user.id]">
+    <ion-avatar slot="start">
+      <img src="assets/icon/user.png" />
+    </ion-avatar>
+    <ion-label>{{user.username}} {{user.lastname}}</ion-label>
+  </ion-item>
+</ion-list>
+</ion-content>

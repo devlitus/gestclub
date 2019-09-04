@@ -1,0 +1,21 @@
+form {
+  width: 100%;
+}
+ion-button[type=submit]{
+  margin-top: 2vh;
+  --background: green;
+  --color-hover: red;
+}
+ion-item {
+  --ion-background-color: transparent;
+}
+.enlaces {
+  text-decoration: none;
+}
+.relleno{
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}

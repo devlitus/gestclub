@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="session/{{id}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{planificacio}}</ion-title>
+    <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{nameTeam}}</ion-badge>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-badge  color="primary" mode="md" style="margin-right: 15px">{{macro}}</ion-badge>
+    <ion-badge  color="secondary" mode="md" style="margin-right: 15px">{{micro}}</ion-badge>
+    <ion-badge  color="tertiary" mode="md" style="margin-right: 15px">{{sessio}}</ion-badge>
+  <h2 text-center>{{nameTeam}}</h2>
+  <p>Afegir nous execicis</p>
+  <form #exeForm="ngForm" (ngSubmit)="onSubmit(exeForm)">
+    <ion-item>
+      <ion-label>Materia <ion-text color="danger">*</ion-text></ion-label>
+      <ion-select multiple="true" placeholder="Selecciona Materia">
+        <ion-select-option value="1">Materia 1</ion-select-option>
+        <ion-select-option value="2">Materia 2</ion-select-option>
+        <ion-select-option value="3">Materia 3</ion-select-option>
+        <ion-select-option value="4">Materia 4</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input type="file"></ion-input>
+    </ion-item>
+    <ion-button expand="block" class="bg-btn">
+      <ion-icon slot="end" name="add"></ion-icon>
+      Afegir
+    </ion-button>
+  </form>
+</ion-content>

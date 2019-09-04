@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="users"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Actualizar Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <h3 text-center>Actualizar Usuario</h3>
+  <form #actForm="ngForm" (ngSubmit)="onSubmit($event, actForm)">
+      <ion-item>
+        <ion-label position="inline">Nom: </ion-label>
+        <ion-input name="username" type="text" [(ngModel)]="user.username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="inline">Congnom: </ion-label>
+        <ion-input name="lastname" type="text" [(ngModel)]="user.lastname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="inline">Contrasenya: </ion-label>
+        <ion-input name="password" type="password" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="inline">Email:</ion-label>
+        <ion-input name="email" type="email" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="inline">Telèfon:</ion-label>
+        <ion-input name="telf" type="number" [(ngModel)]="user.telf"></ion-input>
+      </ion-item>
+    <ion-item>
+      <ion-label position="inline">Direcció:</ion-label>
+      <ion-input name="address" type="text" [(ngModel)]="user.address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">DNI:</ion-label>
+      <ion-input name="dni" type="text" [(ngModel)]="user.dni"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="inline">Data de neixament</ion-label>
+      <ion-input name="birthday" type="date" [(ngModel)]="user.birthday"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input #file name="file" type="file" [(ngModel)]="user.img"></ion-input>
+    </ion-item>
+    <ion-button class="bg-btn" expand="block" type="submit">
+      <ion-icon slot="end" name="send"></ion-icon>
+      Actualitza Usuari
+    </ion-button>
+  </form>
+</ion-content>
