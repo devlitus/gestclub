@@ -9,18 +9,18 @@ import { TeamService } from 'src/app/api/team.service';
 })
 export class TeamUpdateComponent implements OnInit {
   team: any = {};
+  currentTeam: any = JSON.parse(localStorage.getItem('t'));
   constructor(public router: ActivatedRoute, private _service: TeamService) {}
 
   ngOnInit() {
     this.showTeam();
   }
   showTeam(){
-    const id = this.router.snapshot.paramMap.get('id');
     this._service.getTeam()
     .subscribe(data => {
       const team = [...data];
       const t = team.filter(te => {
-        if (te.id === id) {
+        if (te.id === this.currentTeam.id) {
           return te;
         }
       });

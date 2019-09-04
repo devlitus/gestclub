@@ -45,9 +45,12 @@
       Afegir Planificació
     </ion-button>
   </form>
-  <ion-list *ngFor="let p of planning">
-    <ion-item>
-      <ion-label>{{p.name}}</ion-label>
+  <ion-list *ngIf="namePlanning">
+    <ion-text color="">
+      <p>Llista de las planificacion d'equest equip</p>
+    </ion-text>
+    <ion-item (click)="onMacro()">
+      <ion-label>{{namePlanning}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

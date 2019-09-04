@@ -21,7 +21,7 @@
   <h2 text-center>Llistat d'equips</h2>
   <ion-list lines="full" *ngFor="let team of teams">
     <ion-item-sliding>
-      <ion-item [routerLink]="['/team/update/', team.id]">
+      <ion-item (click)="onTeamUpdate(team.id, team.team)">
         <ion-label>
           <h2>{{team.team}}</h2>
         </ion-label>

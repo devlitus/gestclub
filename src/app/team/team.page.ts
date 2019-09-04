@@ -15,27 +15,27 @@ export class TeamPage implements OnInit {
     private _serviceTeam: TeamService,
     public router: Router,
     public alertCtrl: AlertController
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.showTeam();
   }
-  showTeam(){
+  showTeam() {
     this._serviceTeam.getTeam().subscribe(team => {
       this.teams = [...team];
     })
   }
-  insertTeam(team: any){
-    if(!isNullOrUndefined(team)){
+  insertTeam(team: any) {
+    if (!isNullOrUndefined(team)) {
       this._serviceTeam.insertTeam(team).subscribe();
       setTimeout(() => {
         this.showTeam()
       }, 1000);
-    }else {
+    } else {
       this.alert();
     }
   }
-  deleteTeam(item: any){
+  deleteTeam(item: any) {
     this._serviceTeam.deleteTeam(item).subscribe();
     setTimeout(() => {
       this.showTeam()
@@ -69,7 +69,7 @@ export class TeamPage implements OnInit {
     });
     await alert.present();
   }
-  async alertDeleter(team: any){
+  async alertDeleter(team: any) {
     const alert = await this.alertCtrl.create({
       header: '¿ Segu que vols eliminal ?',
       buttons: [
@@ -98,5 +98,13 @@ export class TeamPage implements OnInit {
       //complete()  signify that the refreshing has completed and to close the refresher
       event.target.complete();
     }, 1000);
-}
+  }
+  onTeamUpdate(teamId: any, teamTeam){
+    let currentTeam = {
+      id: teamId,
+      name: teamTeam
+    }
+    localStorage.setItem("t", JSON.stringify(currentTeam));
+    this.router.navigate(['/team/update/'])
+  }
 }

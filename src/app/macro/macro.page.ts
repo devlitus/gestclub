@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from '../api/team.service';
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
-import { componentFactoryName } from '@angular/compiler';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PlanningService } from '../api/planning.service';
+import { MacroService } from '../api/macro.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-macro',
@@ -10,62 +12,53 @@ import { componentFactoryName } from '@angular/compiler';
   styleUrls: ['./macro.page.scss'],
 })
 export class MacroPage implements OnInit {
-  id: any;
-  nameTeam: string;
-  namePlanning: any = localStorage.getItem('p');
+  currentTeam: any = JSON.parse(localStorage.getItem('t'));
+  currentPlanning: any = JSON.parse(localStorage.getItem('p'));
   macros: any[] = [];
-  materies = [
-    {
-      id: 1,
-      nom: 'PSICOLOGIC'
-    },
-    {
-      id:2,
-      nom: 'FISIC'
-    },
-    {
-      id: 3,
-      nom: 'TECNIC PATI'
-    }
-  
-  ]
-
-  constructor(public activatedRoute: ActivatedRoute, public router: Router, private _service: TeamService) { }
-
-  ngOnInit() {
-    this.showTeam()
-  }
-  showTeam() {
-    let id = this.activatedRoute.snapshot.paramMap.get("id");
-    this._service.getTeam().subscribe(data => {
-      const team = [...data];
-      let te = team.filter((t: any) => {
-        if (t.id === id) {
-          return t;
-        }
-      });
-      this.nameTeam = te[0].team_name;
-    });
-  }
-  compareWithfn(item){  
-    console.log(item);
-  }
-  compareWith = this.compareWithfn;
-  onMicro(){
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    localStorage.setItem("ma", this.macroForm.value.name);
-    this.router.navigate(['/micro/', this.id]);
-  }
   macroForm = new FormGroup({
     name: new FormControl('', Validators.required),
     dataInit: new FormControl('', Validators.required),
-    dataFinish: new FormControl('', Validators.required)
+    dataFinish: new FormControl('', Validators.required),
+    materies: new FormControl('')
   })
-  onSubmit(e: any){
-    let macro = {
-      name: this.macroForm.value.name
-    }
+
+  constructor(
+    public activatedRoute: ActivatedRoute, 
+    public router: Router,
+    public service: MacroService,
+    public toastCtrl: ToastController
+    ) { }
+
+  ngOnInit() {
     
-    this.macros.push(macro);
   }
+
+  onMicro(){
+    localStorage.setItem("ma", this.macroForm.value.name);
+    this.router.navigate(['/micro/']);
+  }
+  
+  onSubmit(e: any){
+    if (this.macroForm.valid) {
+      let macro = {
+        macro: this.macroForm.value.name,
+        dataInit: this.macroForm.value.dataInit,
+        dataFinish: this.macroForm.value.dataFinish,
+        materies: this.macroForm.value.materies,
+        idPlanning: this.currentPlanning.id
+      }
+      console.log(macro)
+      // this.service.insertMacro(macro).subscribe();
+    }else {
+      this.toast("Todos los campos deven ser rellenados");
+    }
+  }
+  async toast(message: string) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 1000
+    });
+    toast.present();
+  }
+  
 }
