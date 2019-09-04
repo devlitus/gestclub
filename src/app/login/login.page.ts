@@ -12,15 +12,15 @@ import { UserService } from "../api/user.service";
 export class LoginPage implements OnInit {
   pass: any;
   name: any;
-  constructor(private _service: UserService, public alertCtrl: AlertController,) {}
+  constructor(private _service: UserService, public alertCtrl: AlertController, ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   onSubmit(form: NgForm) {
     if (
       isNullOrUndefined(form.value.name) ||
       isNullOrUndefined(form.value.pass)
     ) {
-      this.alert("Los campos no puedes estar vacios");
+      // this.alert("Los campos no puedes estar vacios");
       return;
     } else if (form.value.name === "" || form.value.pass === "") {
       this.alert("Los campos no puedes estar vacios");
@@ -29,30 +29,15 @@ export class LoginPage implements OnInit {
     let username = form.value.name.charAt(0).toUpperCase() + form.value.name.slice(1);
     let user = {
       username: username,
-      password  : form.value.pass
+      password: form.value.pass
     }
     this._service.verficarLogin(user).subscribe();
   }
 
-  async alert(message: string) {
+
+  async alert(message: string, sub?: string) {
     let alert = await this.alertCtrl.create({
       header: message,
-      subHeader: "Introduce los valores correspondientes",
-      buttons: ["Aceptar"]
-    });
-    await alert.present();
-  }
-  onSubmit(form: NgForm){
-    if(isNullOrUndefined(form.value.name) || isNullOrUndefined(form.value.pass)){
-      this.alert();
-    }else if (form.value.name === "" || form.value.pass === ""){
-      this.alert();
-    }
-  }
-
-  async alert (){
-    let alert = await this.alertCtrl.create({
-      header: 'Usuario Incorrecto!',
       subHeader: 'Hable con el administrador o intente de nuevo',
       buttons: ["Aceptar"]
     })
