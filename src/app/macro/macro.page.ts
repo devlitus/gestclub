@@ -15,11 +15,12 @@ export class MacroPage implements OnInit {
   currentTeam: any = JSON.parse(localStorage.getItem('t'));
   currentPlanning: any = JSON.parse(localStorage.getItem('p'));
   macros: any[] = [];
+  materialMacro: any[] = [];
   macroForm = new FormGroup({
     name: new FormControl('', Validators.required),
     dataInit: new FormControl('', Validators.required),
     dataFinish: new FormControl('', Validators.required),
-    materies: new FormControl('')
+    material: new FormControl('')
   })
 
   constructor(
@@ -30,25 +31,40 @@ export class MacroPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    
+    this.showMacro();
+    this.showMaterialMacro();
   }
-
-  onMicro(){
-    localStorage.setItem("ma", this.macroForm.value.name);
-    this.router.navigate(['/micro/']);
+  showMacro(){
+    this.service.getMacro().subscribe(data => {
+      this.macros = [...data]
+    })
+  }
+  showMaterialMacro(){
+    this.service.getMaterialMacro().subscribe(data => {
+      this.materialMacro = [...data];
+    })
+  }
+  onMicro(m: any){
+    let macro = {
+      macro: m.macro
+    }
+    localStorage.setItem("ma", JSON.stringify(macro));
+    this.router.navigate(['/micro']);
   }
   
   onSubmit(e: any){
     if (this.macroForm.valid) {
       let macro = {
         macro: this.macroForm.value.name,
-        dataInit: this.macroForm.value.dataInit,
-        dataFinish: this.macroForm.value.dataFinish,
-        materies: this.macroForm.value.materies,
+        dateInit: this.macroForm.value.dataInit,
+        dateFinish: this.macroForm.value.dataFinish,
+        material: this.macroForm.value.material,
         idPlanning: this.currentPlanning.id
       }
-      console.log(macro)
-      // this.service.insertMacro(macro).subscribe();
+      this.service.insertMacro(macro).subscribe();
+      setTimeout(() => {
+        this.showMacro();
+      }, 1000);
     }else {
       this.toast("Todos los campos deven ser rellenados");
     }

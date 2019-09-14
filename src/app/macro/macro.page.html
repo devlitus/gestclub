@@ -33,22 +33,20 @@
     </ion-item>
     <ion-item>
       <ion-label>Materies</ion-label>
-      <ion-select formControlName="materies" name="materies" multiple="true" cancelText="Cancel" okText="Ok!"
+      <ion-select formControlName="material" name="material" multiple="true" cancelText="Cancel" okText="Ok!"
         placeholder="Seleccinar Materies">
-        <ion-select-option value="psicologia">psicologia</ion-select-option>
-        <ion-select-option value="FISIC">FISIC</ion-select-option>
-        <ion-select-option value="TECNIC PATI">TECNIC PATI</ion-select-option>
-        <ion-select-option value="TECNIC STICK">TECNIC STICK</ion-select-option>
+        <ion-select-option *ngFor="let material of materialMacro" [value]="material.material_macro">{{material.material_macro}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-button fill="solid" type="submit" expand="full" class="bg-btn">
+    <ion-button fill="solid" type="submit" expand="full" class="bg-btn" [disabled]="!macroForm.valid">
       <ion-icon slot="end" name="add"></ion-icon>
       Afegir
     </ion-button>
   </form>
+  <p>Llista de Macrocicles </p>
   <ion-list *ngIf="macros">
     <ion-item *ngFor="let m of macros" (click)="onMicro(m)">
-      <ion-label>{{ m.name }}</ion-label>
+      <ion-label>{{ m.macro }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
