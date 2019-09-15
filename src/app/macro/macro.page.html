@@ -19,23 +19,23 @@
     <ion-item>
       <ion-label position="floating">Nom Macrocicle <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input formControlName="name" required name="name" type="text"></ion-input>
+      <ion-input formControlName="macro" required name="macro" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input formControlName="dataInit" required name="dataInit" type="date"></ion-input>
+      <ion-input formControlName="dateInit" required name="dateInit" type="date"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input formControlName="dataFinish" required name="dataFinish" type="date"></ion-input>
+      <ion-input formControlName="dateFinish" required name="dateFinish" type="date"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Materies</ion-label>
       <ion-select formControlName="material" name="material" multiple="true" cancelText="Cancel" okText="Ok!"
         placeholder="Seleccinar Materies">
-        <ion-select-option *ngFor="let material of materialMacro" [value]="material.materia_macro">{{material.material_macro}}</ion-select-option>
+        <ion-select-option *ngFor="let material of materialMacro" [value]="material.id">{{material.material_macro}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-button fill="solid" type="submit" expand="full" class="bg-btn">

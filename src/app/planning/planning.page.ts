@@ -23,7 +23,7 @@ export class PlanningPage implements OnInit {
     public toastCtrl: ToastController,
     public activatedRoute: ActivatedRoute,
     private _service: TeamService,
-    private _service_Pla: PlanningService
+    private _servicePla: PlanningService
   ) {}
   planForm = new FormGroup({
     planning: new FormControl("", [Validators.required]),
@@ -49,7 +49,7 @@ export class PlanningPage implements OnInit {
     });
   }
   showPlanning(){
-    this._service_Pla.getPLanning()
+    this._servicePla.getPLanning()
     .subscribe(data => {
       let planning = [...data];
       for (const team of this.team) {
@@ -57,7 +57,7 @@ export class PlanningPage implements OnInit {
           if(team.id_planning === plan.id && team.id === this.currentTeam.id){
             this.namePlanning = plan.planning;
             this.id_planning = plan.id;
-            // console.log(plan.planning);
+            console.log(plan.planning);
           }
         }
       }
@@ -72,9 +72,12 @@ export class PlanningPage implements OnInit {
         data_finish: this.planForm.value.dataFinish,
         id: this.currentTeam.id
       }
-      this._service_Pla.insertPlanning(planning).subscribe();
+      this._servicePla.insertPlanning(planning).subscribe();
       // this.toast("planificació creada correctament");
-      this.router.navigate(["/macro"]);
+      // this.router.navigate(["/macro"]);
+      setTimeout(() => {
+        this._servicePla.getPLanning().subscribe();
+      }, 1000);
     } else {
       this.toast("Tots el camps han de ser omplerts");
     }
