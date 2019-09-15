@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Routes, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { UserService } from 'src/app/api/user.service';
 import { isNullOrUndefined } from 'util';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-user-create',
@@ -17,6 +18,7 @@ export class UserCreateComponent implements OnInit {
   actForm: NgForm
   constructor(
     public route: ActivatedRoute, 
+    public routes: Router,
     public toastCtrl: ToastController,
     private _service: UserService
     ) { }
@@ -40,6 +42,7 @@ export class UserCreateComponent implements OnInit {
       form.append("lastname", actForm.value.lastname);
       form.append("email", actForm.value.email);
       form.append("telf", actForm.value.telf);
+      form.append("password", actForm.value.password);
       form.append("address", actForm.value.address);
       form.append("dni", actForm.value.dni);
       form.append("birthday", actForm.value.birthday);
@@ -47,7 +50,8 @@ export class UserCreateComponent implements OnInit {
         form.append("img", e.target.file.files[0]);  
       }
       this._service.updateUser(form).subscribe();
-      this.toast();
+      this.routes.navigate(['/users']);
+      // this.toast();
     }
     
   }
@@ -55,7 +59,7 @@ export class UserCreateComponent implements OnInit {
     const toast  = await this.toastCtrl.create({
       message: 'Usuari actualitzat correctament !!!!!!',
       position: 'middle',
-      duration: 2000
+      duration: 1000
     });
     toast.present();
   }
