@@ -11,7 +11,7 @@ import { PlanningService } from '../api/planning.service';
   styleUrls: ["./planning.page.scss"]
 })
 export class PlanningPage implements OnInit {
-  disabled: boolean = true;
+  hidden: boolean = false;
   nameTeam: string;
   team: any[] = [];
   planning: any[] = [];
@@ -22,8 +22,8 @@ export class PlanningPage implements OnInit {
     public router: Router,
     public toastCtrl: ToastController,
     public activatedRoute: ActivatedRoute,
-    private _service: TeamService,
-    private _service_Pla: PlanningService
+    private _serviceTeam: TeamService,
+    private _servicePla: PlanningService
   ) {}
   planForm = new FormGroup({
     planning: new FormControl("", [Validators.required]),
@@ -33,35 +33,23 @@ export class PlanningPage implements OnInit {
     objIndividual: new FormControl("")
   });
   ngOnInit() {
-    this.showTeam();
-    this.showPlanning();
+    this.showForm()
   }
-  showTeam() {
-    this._service.getTeam().subscribe(data => {
-      const team = [...data];
-      this.team = team;
-      let te = team.filter((t: any) => {
-        if (t.id === this.currentTeam.id) {
-          return t;
-        }
-      });
-      this.nameTeam = te[0].team;
-    });
+  showOnlyPlanning(id: any){
+    this._servicePla.onlyPlanning(id).subscribe(data => {
+      this.planning = data;
+    })
   }
-  showPlanning(){
-    this._service_Pla.getPLanning()
-    .subscribe(data => {
-      let planning = [...data];
-      for (const team of this.team) {
-        for (const plan of planning) {
-          if(team.id_planning === plan.id && team.id === this.currentTeam.id){
-            this.namePlanning = plan.planning;
-            this.id_planning = plan.id;
-            // console.log(plan.planning);
-          }
-        }
+  showForm(){
+    let id = this.currentTeam[0].id;
+    this._serviceTeam.onlyTeam(id).subscribe(data => {
+      let team = data;
+      if (team.id_planning === null) {
+        this.hidden = true;
+      }else{
+        this.showOnlyPlanning(team.id_planning);
+        this.hidden = false;
       }
-      // console.log(data)
     })
   }
   onSubmit() {
@@ -70,11 +58,13 @@ export class PlanningPage implements OnInit {
         planning: this.planForm.value.planning,
         data_init: this.planForm.value.dataInit,
         data_finish: this.planForm.value.dataFinish,
-        id: this.currentTeam.id
+        id: this.currentTeam[0].id
       }
-      this._service_Pla.insertPlanning(planning).subscribe();
+      this._servicePla.insertPlanning(planning).subscribe();
+      
+      this.hidden = false;
       // this.toast("planificació creada correctament");
-      this.router.navigate(["/macro"]);
+      // this.router.navigate(["/macro"]);
     } else {
       this.toast("Tots el camps han de ser omplerts");
     }
