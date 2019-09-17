@@ -1,71 +1,81 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TeamService } from '../api/team.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PlanningService } from '../api/planning.service';
-import { MacroService } from '../api/macro.service';
-import { ToastController } from '@ionic/angular';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { TeamService } from "../api/team.service";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { PlanningService } from "../api/planning.service";
+import { MacroService } from "../api/macro.service";
+import { ToastController } from "@ionic/angular";
 
 @Component({
-  selector: 'app-macro',
-  templateUrl: './macro.page.html',
-  styleUrls: ['./macro.page.scss'],
+  selector: "app-macro",
+  templateUrl: "./macro.page.html",
+  styleUrls: ["./macro.page.scss"]
 })
 export class MacroPage implements OnInit {
-  currentTeam: any = JSON.parse(localStorage.getItem('t'));
-  currentPlanning: any = JSON.parse(localStorage.getItem('p'));
+  material: any[] = [];
   macros: any[] = [];
-  materialMacro: any[] = [];
+  teamName = JSON.parse(localStorage.getItem('t'));
+  planningName: string;
+  idPlanning = this.activatedRoute.snapshot.paramMap.get('id');
   macroForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    dataInit: new FormControl('', Validators.required),
-    dataFinish: new FormControl('', Validators.required),
-    material: new FormControl('')
-  })
+    name: new FormControl("", Validators.required),
+    dataInit: new FormControl("", Validators.required),
+    dataFinish: new FormControl("", Validators.required),
+    material: new FormControl("")
+  });
 
   constructor(
-    public activatedRoute: ActivatedRoute, 
+    public activatedRoute: ActivatedRoute,
     public router: Router,
-    public service: MacroService,
+    public _serviceMacro: MacroService,
+    public _servicePlanning: PlanningService,
     public toastCtrl: ToastController
-    ) { }
+  ) {}
 
   ngOnInit() {
     this.showMacro();
-    this.showMaterialMacro();
+    this.onlyPlanning();
+    this.materialMacro();
   }
-  showMacro(){
-    this.service.getMacro().subscribe(data => {
-      this.macros = [...data]
+  onlyPlanning(){
+    this._servicePlanning.onlyPlanning(this.idPlanning).subscribe(data => {
+      this.planningName = data.planning;
     })
   }
-  showMaterialMacro(){
-    this.service.getMaterialMacro().subscribe(data => {
-      this.materialMacro = [...data];
-    })
-  }
-  onMicro(m: any){
-    let macro = {
-      macro: m.macro
-    }
-    localStorage.setItem("ma", JSON.stringify(macro));
-    this.router.navigate(['/micro']);
+   showMacro(){
+    this._serviceMacro.getMacro().subscribe(data => {
+      let macro = [...data];
+      let ma = macro.filter(m => {
+        if(m.id_planning === this.idPlanning){
+          return m
+        }
+      });
+      this.macros = ma;
+    });
   }
   
-  onSubmit(e: any){
+  materialMacro() {
+    this._serviceMacro.getMaterialMacro().subscribe(data => {
+      this.material = [...data];
+    });
+  }
+  onMicro(macro: any){
+    this.router.navigate(['/micro', this.idPlanning]);
+  }
+  onSubmit(e: any) {
     if (this.macroForm.valid) {
       let macro = {
         macro: this.macroForm.value.name,
         dateInit: this.macroForm.value.dataInit,
         dateFinish: this.macroForm.value.dataFinish,
         material: this.macroForm.value.material,
-        idPlanning: this.currentPlanning.id
-      }
-      this.service.insertMacro(macro).subscribe();
+        idPlanning: this.idPlanning
+      };
+      this._serviceMacro.insertMacro(macro).subscribe();
       setTimeout(() => {
         this.showMacro();
       }, 1000);
-    }else {
+    } else {
       this.toast("Todos los campos deven ser rellenados");
     }
   }
@@ -76,5 +86,4 @@ export class MacroPage implements OnInit {
     });
     toast.present();
   }
-  
 }

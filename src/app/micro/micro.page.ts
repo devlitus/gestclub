@@ -10,11 +10,7 @@ import { MicroService } from '../api/micro.service';
   styleUrls: ['./micro.page.scss'],
 })
 export class MicroPage implements OnInit {
-  nameTeam = JSON.parse(localStorage.getItem("t"));
-  namePlanning = JSON.parse(localStorage.getItem('p'));
-  nameMacro = JSON.parse(localStorage.getItem('ma'));
-  micro: any[] = [];
-  materialMicro: any[] = [];
+  idPlanning = this.activateRoute.snapshot.paramMap.get('id');
   microForm = new FormGroup({
     micro: new FormControl('', Validators.required),
     dateInit: new FormControl('', Validators.required),
@@ -23,21 +19,18 @@ export class MicroPage implements OnInit {
   })
   constructor(
     public _service: MicroService, 
+    public activateRoute: ActivatedRoute,
     public router: Router,
     public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(this.nameMacro)
+
   }
   showMicro(){
-    this._service.getMicro().subscribe(data => {
-      this.micro = [...data];
-    })
+    
   }
   showMaterialMicro(){
-    this._service.getMaterialMicro().subscribe(data => {
-      this.materialMicro = [...data];
-    })
+    
   }
   
   onSubmit(e: any){
@@ -46,7 +39,8 @@ export class MicroPage implements OnInit {
         micro: this.microForm.value.micro,
         dateInit: this.microForm.value.dateInit,
         dateFinish: this.microForm.value.dateFinish,
-        material: this.microForm.value.material
+        material: this.microForm.value.material,
+        idPlanning: this.idPlanning
       }
     }
   }

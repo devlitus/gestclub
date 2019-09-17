@@ -44,6 +44,7 @@ export class PlanningPage implements OnInit {
     let id = this.currentTeam[0].id;
     this._serviceTeam.onlyTeam(id).subscribe(data => {
       let team = data;
+      this.nameTeam = team.team;
       if (team.id_planning === null) {
         this.hidden = true;
       }else{
@@ -63,19 +64,14 @@ export class PlanningPage implements OnInit {
       this._servicePla.insertPlanning(planning).subscribe();
       
       this.hidden = false;
-      // this.toast("planificació creada correctament");
+      this.toast("planificació creada correctament");
       // this.router.navigate(["/macro"]);
     } else {
       this.toast("Tots el camps han de ser omplerts");
     }
   }
-  onMacro(){
-    let currentPlanning = {
-      id: this.id_planning,
-      name: this.namePlanning
-    }
-    localStorage.setItem('p', JSON.stringify(currentPlanning));
-    this.router.navigate(['/macro']);
+  onMacro(id: any){
+    this.router.navigate(['/macro', id]);
   }
   async toast(message: string) {
     const toast = await this.toastCtrl.create({

@@ -19,7 +19,7 @@ export class MicroService {
       })
     );
   }
-  getMaterialMicro() {
+  getMaterialMicro(id: any) {
     return this._http.get(`${url}/material_micro`).pipe(
       map((data: any) => {
         if (data.ok) {

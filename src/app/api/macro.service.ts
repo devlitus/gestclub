@@ -20,6 +20,17 @@ export class MacroService {
       })
     )
   }
+  macro(){
+    return this._http.get(`${url}/total_macro`).pipe(
+      map((data: any) => {
+        if (data.ok) {
+          return data.macro;
+        } else {
+          return data.error;
+        }
+      })
+    )
+  }
   getMaterialMacro(){
     return this._http.get(`${url}/material_macro`).pipe(
       map((data: any) => {
