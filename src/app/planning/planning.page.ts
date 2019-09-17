@@ -11,20 +11,9 @@ import { PlanningService } from '../api/planning.service';
   styleUrls: ["./planning.page.scss"]
 })
 export class PlanningPage implements OnInit {
-  disabled: boolean = true;
-  nameTeam: string;
-  team: any[] = [];
   planning: any[] = [];
-  namePlanning: string;
-  id_planning: any;
+  isplanning: boolean = false;
   currentTeam = JSON.parse(localStorage.getItem('t'));
-  constructor(
-    public router: Router,
-    public toastCtrl: ToastController,
-    public activatedRoute: ActivatedRoute,
-    private _service: TeamService,
-    private _servicePla: PlanningService
-  ) {}
   planForm = new FormGroup({
     planning: new FormControl("", [Validators.required]),
     dataInit: new FormControl("", [Validators.required]),
@@ -32,38 +21,24 @@ export class PlanningPage implements OnInit {
     objColectiu: new FormControl(""),
     objIndividual: new FormControl("")
   });
+  constructor(
+    public router: Router,
+    public toastCtrl: ToastController,
+    public activatedRoute: ActivatedRoute,
+    private _servicePla: PlanningService,
+    private _serviceTeam: TeamService
+  ) { }
   ngOnInit() {
-    this.showTeam();
-    this.showPlanning();
+    // this.showPlanningTeam();
   }
-  showTeam() {
-    this._service.getTeam().subscribe(data => {
-      const team = [...data];
-      this.team = team;
-      let te = team.filter((t: any) => {
-        if (t.id === this.currentTeam.id) {
-          return t;
-        }
-      });
-      this.nameTeam = te[0].team;
-    });
-  }
-  showPlanning(){
-    this._servicePla.getPLanning()
-    .subscribe(data => {
-      let planning = [...data];
-      for (const team of this.team) {
-        for (const plan of planning) {
-          if(team.id_planning === plan.id && team.id === this.currentTeam.id){
-            this.namePlanning = plan.planning;
-            this.id_planning = plan.id;
-            console.log(plan.planning);
-          }
-        }
-      }
-      // console.log(data)
+
+  showPlanningTeam() {
+    const team = JSON.parse(localStorage.getItem('t'));
+    this._servicePla.planningTeam(team.id).subscribe(data => {
+      Object.assign(this.planning, data);
     })
   }
+
   onSubmit() {
     if (this.planForm.valid) {
       let planning = {
@@ -73,22 +48,18 @@ export class PlanningPage implements OnInit {
         id: this.currentTeam.id
       }
       this._servicePla.insertPlanning(planning).subscribe();
+      setTimeout(() => {
+        
+        this.showPlanningTeam();
+      }, 1000);
       // this.toast("planificació creada correctament");
       // this.router.navigate(["/macro"]);
-      setTimeout(() => {
-        this._servicePla.getPLanning().subscribe();
-      }, 1000);
     } else {
       this.toast("Tots el camps han de ser omplerts");
     }
   }
-  onMacro(){
-    let currentPlanning = {
-      id: this.id_planning,
-      name: this.namePlanning
-    }
-    localStorage.setItem('p', JSON.stringify(currentPlanning));
-    this.router.navigate(['/macro']);
+  onMacro() {
+    this.router.navigate(["/macro"]);
   }
   async toast(message: string) {
     const toast = await this.toastCtrl.create({

@@ -8,12 +8,12 @@
         <ion-icon slot="end" name="calendar"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ currentPlanning.name }}</ion-title>
+    <ion-title>{{ currentPlanning }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2 text-center>{{ currentTeam.name }}</h2>
+  <h2 text-center>{{ currentTeam }}</h2>
   <p>Afegir nous macrocicles</p>
   <form [formGroup]="macroForm" (ngSubmit)="onSubmit($event)">
     <ion-item>
