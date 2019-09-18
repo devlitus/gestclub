@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastController } from "@ionic/angular";
 import { TeamService } from "../api/team.service";
+import { PlanningService } from '../api/planning.service';
 
 @Component({
   selector: "app-planning",
@@ -10,52 +11,70 @@ import { TeamService } from "../api/team.service";
   styleUrls: ["./planning.page.scss"]
 })
 export class PlanningPage implements OnInit {
-  disabled: boolean = true;
+  hidden: boolean = false;
   nameTeam: string;
+  team: any[] = [];
   planning: any[] = [];
-  id: any;
+  namePlanning: string;
+  id_planning: any;
+  currentTeam = JSON.parse(localStorage.getItem('t'));
   constructor(
     public router: Router,
     public toastCtrl: ToastController,
     public activatedRoute: ActivatedRoute,
-    private _service: TeamService
+    private _serviceTeam: TeamService,
+    private _servicePla: PlanningService
   ) {}
   planForm = new FormGroup({
-    name: new FormControl("", [Validators.required]),
+    planning: new FormControl("", [Validators.required]),
     dataInit: new FormControl("", [Validators.required]),
     dataFinish: new FormControl("", [Validators.required]),
-    objColectiu: new FormControl("", [Validators.required]),
-    objIndividual: new FormControl("", [Validators.required])
+    objColectiu: new FormControl(""),
+    objIndividual: new FormControl("")
   });
   ngOnInit() {
-    this.showTeam();
+    this.showForm()
   }
-  showTeam() {
-    let id = this.activatedRoute.snapshot.paramMap.get("id");
-    this._service.getTeam().subscribe(data => {
-      const team = [...data];
-      let te = team.filter((t: any) => {
-        if (t.id === id) {
-          return t;
-        }
-      });
-      this.nameTeam = te[0].team_name;
-    });
+  showOnlyPlanning(id: any){
+    this._servicePla.onlyPlanning(id).subscribe(data => {
+      this.planning = data;
+    })
   }
-  onSubmit(e: any) {
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+  showForm(){
+    let id = this.currentTeam[0].id;
+    this._serviceTeam.onlyTeam(id).subscribe(data => {
+      let team = data;
+      this.nameTeam = team.team;
+      if (team.id_planning === null) {
+        this.hidden = true;
+      }else{
+        this.showOnlyPlanning(team.id_planning);
+        this.hidden = false;
+      }
+    })
+  }
+  onSubmit() {
     if (this.planForm.valid) {
-      this.disabled = false;
-      localStorage.setItem('p', this.planForm.value.name);
-      this.planning.push({
-        name: this.planForm.value.name
-      })
-      // this.toast("planificació creada correctament");
-      this.router.navigate(["/macro/", this.id]);
+      let planning = {
+        planning: this.planForm.value.planning,
+        data_init: this.planForm.value.dataInit,
+        data_finish: this.planForm.value.dataFinish,
+        id: this.currentTeam[0].id
+      }
+      this._servicePla.insertPlanning(planning).subscribe();
+      
+      this.hidden = false;
+      this.toast("planificació creada correctament");
+      setTimeout(() => {
+        this.showForm();
+      }, 1000);
+      // this.router.navigate(["/macro"]);
     } else {
       this.toast("Tots el camps han de ser omplerts");
     }
-    console.warn(this.planForm.valid);
+  }
+  onMacro(id: any){
+    this.router.navigate(['/macro', id]);
   }
   async toast(message: string) {
     const toast = await this.toastCtrl.create({

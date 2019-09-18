@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="management"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button >
         <ion-icon slot="end" name="clipboard"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,11 +14,11 @@
 
 <ion-content class="ion-padding">
   <h2 text-center>{{nameTeam}}</h2>
-  <form [formGroup]="planForm" (ngSubmit)="onSubmit($event)">
+  <form [formGroup]="planForm" (ngSubmit)="onSubmit($event)" *ngIf="hidden">
       <ion-item>
           <ion-label position="floating">Nom de la Planificació <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input formControlName="name" name="name" type="text" required></ion-input>
+          <ion-input formControlName="planning" name="planning" type="text" required></ion-input>
         </ion-item>
     <ion-item>
       <ion-label position="inline">Data Inici <ion-text color="danger">*</ion-text>
@@ -33,21 +33,24 @@
     <ion-item>
       <ion-label position="floating">Objectiu Colectiu <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input formControlName="objColectiu" name="objColectiu" type="text" required></ion-input>
+      <ion-input formControlName="objColectiu" name="objColectiu" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Objectiu Individual <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input formControlName="objIndividual" name="objIndividual" type="text" required></ion-input>
+      <ion-input formControlName="objIndividual" name="objIndividual" type="text"></ion-input>
     </ion-item>
     <ion-button type="submit" class="bg-btn" fill="solid" expand="block">
       <ion-icon slot="start" name="add"></ion-icon>
       Afegir Planificació
     </ion-button>
   </form>
-  <ion-list *ngFor="let p of planning">
-    <ion-item>
-      <ion-label>{{p.name}}</ion-label>
+  <ion-list *ngIf="!hidden">
+    <ion-text color="">
+      <p>Llista de las planificacion d'equest equip</p>
+    </ion-text>
+    <ion-item  (click)="onMacro(planning.id)">
+      <ion-label>{{planning.planning}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

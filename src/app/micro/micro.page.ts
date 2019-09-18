@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamService } from '../api/team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MicroService } from '../api/micro.service';
+import { PlanningService } from '../api/planning.service';
 
 @Component({
   selector: 'app-micro',
@@ -9,65 +10,57 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./micro.page.scss'],
 })
 export class MicroPage implements OnInit {
-  nameTeam: string;
-  id: any;
-  namePlanning = localStorage.getItem('p');
-  nameMacro = localStorage.getItem('ma');
-  micros: any[] = []; 
-  materies = [
-    {
-      id: 1,
-      nom: 'Motivació'
-    },
-    {
-      id:2,
-      nom: 'Compromís'
-    },
-    {
-      id: 3,
-      nom: 'Aspiracions'
-    }
-  
-  ]
+  idPlanning: any = this.activateRoute.snapshot.paramMap.get('id');
+  macroName = localStorage.getItem('ma');
+  team = JSON.parse(localStorage.getItem('t'));
+  planningName: string;
+  material: any[] = [];
+  microForm = new FormGroup({
+    micro: new FormControl('', Validators.required),
+    dateInit: new FormControl('', Validators.required),
+    dateFinish: new FormControl('', Validators.required),
+    material: new FormControl('')
+  })
   constructor(
-    private _service: TeamService, 
-    public router: Router,
-    public activatedRoute: ActivatedRoute) { }
+    public _service: MicroService, 
+    public _servicePlanning: PlanningService,
+    public activateRoute: ActivatedRoute,
+    public router: Router
+    ) { }
 
   ngOnInit() {
-    this.showTeam()
+    this.showMicro();
+    this.onlyPlanning();
+    this.showMaterialMicro();
+  }
+  showMicro(){
+    this._service.getMicro().subscribe(data => {
+      console.log(data);
+    })
+  }
+  onlyPlanning(){
+    this._servicePlanning.onlyPlanning(this.idPlanning).subscribe(data => {
+      this.planningName = data.planning;
+    })
+  }
+  showMaterialMicro(){
+    this._service.getMaterialMicro(this.idPlanning, this.macroName).subscribe(data => {
+      this.material = [...data];
+    }) 
   }
   
-  compareWithfn(item){  
-    console.log(item);
-  }
-  compareWith = this.compareWithfn;
-  showTeam() {
-    let id = this.activatedRoute.snapshot.paramMap.get("id");
-    this._service.getTeam().subscribe(data => {
-      const team = [...data];
-      let te = team.filter((t: any) => {
-        if (t.id === id) {
-          return t;
-        }
-      });
-      this.nameTeam = te[0].team_name;
-    });
-  }
-  microForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    dataInit: new FormControl('', Validators.required),
-    dataFinish: new FormControl('', Validators.required)
-  })
   onSubmit(e: any){
-    let micro = {
-      name: this.microForm.value.name
+    if (this.microForm.valid){
+      let micro = {
+        micro: this.microForm.value.micro,
+        dateInit: this.microForm.value.dateInit,
+        dateFinish: this.microForm.value.dateFinish,
+        material: this.microForm.value.material,
+        idPlanning: this.idPlanning
+      }
     }
-    this.micros.push(micro);
-    localStorage.setItem('mi', this.microForm.value.name);
   }
   onSession(){
-    this.id =this.activatedRoute.snapshot.paramMap.get("id");
-    this.router.navigate(['/session/', this.id]);
+    
   }
 }

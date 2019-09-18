@@ -10,6 +10,8 @@ import { UserService } from "../api/user.service";
   styleUrls: ["./login.page.scss"]
 })
 export class LoginPage implements OnInit {
+  pass: any;
+  name: any;
   constructor(private _service: UserService, public alertCtrl: AlertController,) {}
   name: any;
   pass: any;
@@ -30,8 +32,7 @@ export class LoginPage implements OnInit {
       username: username,
       password  : form.value.pass
     }
-    this._service.verficarLogin(user).subscribe()
-    // this.router.navigate(['/team']);
+    this._service.verficarLogin(user).subscribe();
   }
 
   async alert(message: string) {
