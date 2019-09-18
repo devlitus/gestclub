@@ -46,7 +46,11 @@ export class PlanningService {
   insertPlanning(planning: any) {
     return this._http.post(`${url}/insert_planning`, planning).pipe(
       map((data: any) => {
-        console.log(data);
+        if (data.ok) {
+          return data.message;
+        } else {
+          return data.error;
+        }
       })
     );
   }

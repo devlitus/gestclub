@@ -60,7 +60,10 @@ export class MacroPage implements OnInit {
     });
   }
   onMicro(macro: any){
-    this.router.navigate(['/micro', this.idPlanning]);
+    let id = macro.id_planning;
+    let macroName = macro.macro;
+    localStorage.setItem('ma', macroName);
+    this.router.navigate(['/micro', id]);
   }
   onSubmit(e: any) {
     if (this.macroForm.valid) {

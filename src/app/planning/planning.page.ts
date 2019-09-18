@@ -65,6 +65,9 @@ export class PlanningPage implements OnInit {
       
       this.hidden = false;
       this.toast("planificació creada correctament");
+      setTimeout(() => {
+        this.showForm();
+      }, 1000);
       // this.router.navigate(["/macro"]);
     } else {
       this.toast("Tots el camps han de ser omplerts");
