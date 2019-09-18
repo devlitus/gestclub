@@ -99,7 +99,7 @@ export class TeamPage implements OnInit {
       event.target.complete();
     }, 1000);
   }
-  onTeamUpdate(teamId: any, teamTeam){
+  onTeamUpdate(teamId: any, teamTeam: any){
     let currentTeam = {
       id: teamId,
       name: teamTeam

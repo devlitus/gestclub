@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'users/create/:id', component: UserCreateComponent },
   { path: 'users/add', component: UserAddComponent },
   { path: 'planning', loadChildren: './planning/planning.module#PlanningPageModule' },
-  { path: 'macro', loadChildren: './macro/macro.module#MacroPageModule' },
+  { path: 'macro/:id', loadChildren: './macro/macro.module#MacroPageModule' },
   { path: 'micro/:id', loadChildren: './micro/micro.module#MicroPageModule' },
   { path: 'session/:id', loadChildren: './session/session.module#SessionPageModule' },
   { path: 'exercises/:id', loadChildren: './exercises/exercises.module#ExercisesPageModule' },

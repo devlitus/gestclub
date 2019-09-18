@@ -5,4 +5,4 @@
 // export const url: string = 'http://localhost/apigestdepor';
 
 // Desarrolo linux
-export const url: string = 'http://server.loc/apigestdepor';
+export const url: string = 'http://server.net/apigestdepor';
