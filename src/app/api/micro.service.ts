@@ -45,8 +45,10 @@ export class MicroService {
     return this._http.post(`${url}/insert_micro`, micro).pipe(
       map((data: any) => {
         if (data.ok) {
+          console.log(data.message);
           return data.message;
         } else {
+          console.log(data.error);
           return data.error;
         }
       })

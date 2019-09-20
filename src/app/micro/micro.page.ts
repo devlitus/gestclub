@@ -14,6 +14,7 @@ export class MicroPage implements OnInit {
   macroName = localStorage.getItem('ma');
   team = JSON.parse(localStorage.getItem('t'));
   planningName: string;
+  micros: any[] = [];
   material: any[] = [];
   microForm = new FormGroup({
     micro: new FormControl('', Validators.required),
@@ -36,6 +37,7 @@ export class MicroPage implements OnInit {
   showMicro(){
     this._service.getMicro().subscribe(data => {
       console.log(data);
+      this.micros = [...data];
     })
   }
   onlyPlanning(){
@@ -58,6 +60,10 @@ export class MicroPage implements OnInit {
         material: this.microForm.value.material,
         idPlanning: this.idPlanning
       }
+      this._service.insertMicro(micro).subscribe();
+      setTimeout(() => {
+        this.showMicro();
+      }, 1000);
     }
   }
   onSession(){
