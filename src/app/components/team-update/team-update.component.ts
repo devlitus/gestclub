@@ -8,7 +8,7 @@ import { TeamService } from 'src/app/api/team.service';
   styleUrls: ['./team-update.component.scss'],
 })
 export class TeamUpdateComponent implements OnInit {
-  team: any = {};
+  team: any[] = [];
   currentTeam: any = JSON.parse(localStorage.getItem('t'));
   constructor(public router: ActivatedRoute, private _service: TeamService) {}
 
@@ -24,11 +24,11 @@ export class TeamUpdateComponent implements OnInit {
           return te;
         }
       });
-      this.team = {
+      const te = {
         id: t[0].id,
-        name: t[0].team_name
+        team: t[0].team,
       }
-      console.log(t);
+      console.log(te);
     })
   }
 

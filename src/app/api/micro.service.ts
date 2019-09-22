@@ -3,42 +3,42 @@ import { HttpClient } from '@angular/common/http';
 import { url } from '../config/config';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class MacroService {
-  macros: any[] = [];
+export class MicroService {
+
   constructor(private _http: HttpClient) { }
-  getMacro() {
-    return this._http.get(`${url}/macro`).pipe(
+  getMicro() {
+    return this._http.get(`${url}/micro`).pipe(
       map((data: any) => {
         if (data.ok) {
-          console.log(data);
-          return data.macro;
+          return data.micro
         } else {
-          return data.error;
+          return data.error
         }
       })
     )
   }
-  getMaterialMacro() {
-    return this._http.get(`${url}/material_macro`).pipe(
+  getMaterialMacro(){
+    return this._http.get(`${url}/material_micro`).pipe(
       map((data: any) => {
         if (data.ok) {
-          return data.material;
+          return data.material
         } else {
-          return data.error;
+          return data.error
         }
       })
     )
   }
-  insertMacro(macro: any) {
-    return this._http.post(`${url}/insert_macro`, macro).pipe(
+  insertMicro(micro: any){
+    return this._http.post(`${url}`, micro).pipe(
       map((data: any) => {
         if (data.ok) {
-          return data;
+          return data.message
         } else {
-          return data.error;
+          return data.error
         }
       })
     )
