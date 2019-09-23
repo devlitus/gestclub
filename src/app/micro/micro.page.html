@@ -1,15 +1,15 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="macro"></ion-back-button>
+      <ion-back-button defaultHref="macro/{{idPlanning}}"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{namePlanning.name}}</ion-title>
-    <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{nameTeam.name}}</ion-badge>
+    <ion-title>{{planningName}}</ion-title>
+    <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{team[0].team}}</ion-badge>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2 text-center>{{nameMacro.macro}}</h2>
+  <h2 text-center>{{macroName}}</h2>
   <form [formGroup]="microForm" (ngSubmit)="onSubmit($event)">
     <p>Afegir un nou microcicle</p>
     <ion-item>
@@ -29,19 +29,21 @@
     </ion-item>
     <ion-item>
       <ion-label>Materies</ion-label>
-      <ion-select formControlname="material" name="material" multiple="true" cancelText="Cancel" okText="Ok!" [compareWith]="compareWith"
+      <ion-select formControlName="material" name="material" multiple="true" cancelText="Cancel" okText="Ok!"
         placeholder="Seleccinar Materies">
-        <ion-select-option *ngFor="let m of materies">{{m.nom}}</ion-select-option>
+        <ion-select-option *ngFor="let material of material" [value]="material.id">{{material.material_micro}}
+        </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-button fill="solid" type="submit" expand="full" class="bg-btn">
+    <ion-button fill="solid" type="submit" expand="full" class="bg-btn" [disabled]="!microForm.valid">
       <ion-icon slot="end" name="add"></ion-icon>
       Afegir
     </ion-button>
   </form>
-  <ion-list *ngIf="micros">
-    <ion-item *ngFor="let mi of micros" (click)="onSession()">
-      <ion-label>{{mi.name}}</ion-label>
+  <ion-list *ngIf="micros.length !== 0">
+    <p>Llistat de microcicles de la <ion-badge color="tertiary" mode="md">{{macroName}}</ion-badge></p>
+    <ion-item *ngFor="let mi of micros" (click)="onSession(mi)">
+      <ion-label>{{mi.micro}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

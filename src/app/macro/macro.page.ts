@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MacroService } from '../api/macro.service';
 import { ToastController } from '@ionic/angular';
+import { PlanningService } from '../api/planning.service';
 
 @Component({
   selector: 'app-macro',
@@ -10,58 +11,70 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./macro.page.scss'],
 })
 export class MacroPage implements OnInit {
-  currentTeam: any = JSON.parse(localStorage.getItem('t'));
-  currentPlanning: any = JSON.parse(localStorage.getItem('p'));
+  material: any[] = [];
   macros: any[] = [];
-  materialMacro: any[] = [];
+  teamName = JSON.parse(localStorage.getItem('t'));
+  planningName: string;
+  idPlanning = this.activatedRoute.snapshot.paramMap.get('id');
   macroForm = new FormGroup({
-    macro: new FormControl('', Validators.required),
-    dateInit: new FormControl('', Validators.required),
-    dateFinish: new FormControl('', Validators.required),
-    material: new FormControl('')
-  })
+    name: new FormControl("", Validators.required),
+    dataInit: new FormControl("", Validators.required),
+    dataFinish: new FormControl("", Validators.required),
+    material: new FormControl("")
+  });
 
   constructor(
     public activatedRoute: ActivatedRoute,
     public router: Router,
-    public service: MacroService,
+    public _serviceMacro: MacroService,
+    public _servicePlanning: PlanningService,
     public toastCtrl: ToastController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.showMacro();
-    this.getMaterialMacro();
+    this.onlyPlanning();
+    this.materialMacro();
   }
-  showMacro() {
-    this.service.getMacro().subscribe(data => {
+  onlyPlanning(){
+    this._servicePlanning.onlyPlanning(this.idPlanning).subscribe(data => {
+      this.planningName = data.planning;
+    })
+  }
+   showMacro(){
+    this._serviceMacro.getMacro().subscribe(data => {
       let macro = [...data];
       let ma = macro.filter(m => {
-        if (m.id_planning === this.currentPlanning.id) {
-          return m;
+        if(m.id_planning === this.idPlanning){
+          return m
         }
       });
-      this.macros = [...ma];
-    })
+      this.macros = ma;
+    });
   }
-  onMicro(m: any) {
-    // this.router.navigate(['/micro']);
+  
+  materialMacro() {
+    this._serviceMacro.getMaterialMacro().subscribe(data => {
+      this.material = [...data];
+    });
   }
-  getMaterialMacro() {
-    this.service.getMaterialMacro().subscribe(data => {
-      this.materialMacro = [...data];
-    })
+  onMicro(macro: any){
+    let id = macro.id_planning;
+    let macroName = macro.macro;
+    console.log(macro)
+    localStorage.setItem('ma', macroName);
+    this.router.navigate(['/micro', id]);
   }
   onSubmit(e: any) {
     if (this.macroForm.valid) {
       let macro = {
-        macro: this.macroForm.value.macro,
-        dateInit: this.macroForm.value.dateInit,
-        dateFinish: this.macroForm.value.dateFinish,
+        macro: this.macroForm.value.name,
+        dateInit: this.macroForm.value.dataInit,
+        dateFinish: this.macroForm.value.dataFinish,
         material: this.macroForm.value.material,
-        idPlanning: this.currentPlanning.id
-      }
-      localStorage.setItem("ma", JSON.stringify({ macro: this.macroForm.value.macro, material: this.macroForm.value.material, idPlanning: this.macroForm.value.idPlanning }));
-      this.service.insertMacro(macro).subscribe();
+        idPlanning: this.idPlanning
+      };
+      this._serviceMacro.insertMacro(macro).subscribe();
       setTimeout(() => {
         this.showMacro();
       }, 1000);

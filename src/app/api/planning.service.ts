@@ -22,18 +22,18 @@ export class PlanningService {
       })
     )
   }
-  onlyPLanning(id: any) {
+  onlyPlanning(id: any){
     return this._http.post(`${url}/only_planning`, { id: id }).pipe(
       map((data: any) => {
         if (data.ok) {
           return data.planning;
         } else {
-          console.log(data.error);
-          return data.error
+          return data.error;
         }
       })
-    )
+    );
   }
+
   planningTeam(id: any) {
     return this._http.post(`${url}/planning_team`, { id: id }).pipe(
       map((data: any) => {

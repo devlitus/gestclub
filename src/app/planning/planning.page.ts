@@ -11,9 +11,20 @@ import { PlanningService } from '../api/planning.service';
   styleUrls: ["./planning.page.scss"]
 })
 export class PlanningPage implements OnInit {
+  hidden: boolean = false;
+  nameTeam: string;
+  team: any[] = [];
   planning: any[] = [];
-  isplanning: boolean = false;
+  namePlanning: string;
+  id_planning: any;
   currentTeam = JSON.parse(localStorage.getItem('t'));
+  constructor(
+    public router: Router,
+    public toastCtrl: ToastController,
+    public activatedRoute: ActivatedRoute,
+    private _serviceTeam: TeamService,
+    private _servicePla: PlanningService
+  ) {}
   planForm = new FormGroup({
     planning: new FormControl("", [Validators.required]),
     dataInit: new FormControl("", [Validators.required]),
@@ -21,45 +32,49 @@ export class PlanningPage implements OnInit {
     objColectiu: new FormControl(""),
     objIndividual: new FormControl("")
   });
-  constructor(
-    public router: Router,
-    public toastCtrl: ToastController,
-    public activatedRoute: ActivatedRoute,
-    private _servicePla: PlanningService,
-    private _serviceTeam: TeamService
-  ) { }
   ngOnInit() {
-    // this.showPlanningTeam();
+    this.showForm()
   }
-
-  showPlanningTeam() {
-    const team = JSON.parse(localStorage.getItem('t'));
-    this._servicePla.planningTeam(team.id).subscribe(data => {
-      Object.assign(this.planning, data);
+  showOnlyPlanning(id: any){
+    this._servicePla.onlyPlanning(id).subscribe(data => {
+      this.planning = data;
     })
   }
-
+  showForm(){
+    let id = this.currentTeam[0].id;
+    this._serviceTeam.onlyTeam(id).subscribe(data => {
+      let team = data;
+      this.nameTeam = team.team;
+      if (team.id_planning === null) {
+        this.hidden = true;
+      }else{
+        this.showOnlyPlanning(team.id_planning);
+        this.hidden = false;
+      }
+    })
+  }
   onSubmit() {
     if (this.planForm.valid) {
       let planning = {
         planning: this.planForm.value.planning,
         data_init: this.planForm.value.dataInit,
         data_finish: this.planForm.value.dataFinish,
-        id: this.currentTeam.id
+        id: this.currentTeam[0].id
       }
       this._servicePla.insertPlanning(planning).subscribe();
+      
+      this.hidden = false;
+      this.toast("planificació creada correctament");
       setTimeout(() => {
-        
-        this.showPlanningTeam();
+        this.showForm();
       }, 1000);
-      // this.toast("planificació creada correctament");
       // this.router.navigate(["/macro"]);
     } else {
       this.toast("Tots el camps han de ser omplerts");
     }
   }
-  onMacro() {
-    this.router.navigate(["/macro"]);
+  onMacro(id: any){
+    this.router.navigate(['/macro', id]);
   }
   async toast(message: string) {
     const toast = await this.toastCtrl.create({

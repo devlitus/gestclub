@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from 'src/app/api/team.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { TeamService } from 'src/app/api/team.service';
   styleUrls: ['./team-update.component.scss'],
 })
 export class TeamUpdateComponent implements OnInit {
-  team: any[] = [];
+  team: any = [];
   currentTeam: any = JSON.parse(localStorage.getItem('t'));
-  constructor(public router: ActivatedRoute, private _service: TeamService) {}
+  constructor(public router: Router, private _service: TeamService) {}
 
   ngOnInit() {
     this.showTeam();
@@ -24,12 +24,15 @@ export class TeamUpdateComponent implements OnInit {
           return te;
         }
       });
-      const te = {
-        id: t[0].id,
-        team: t[0].team,
+      localStorage.setItem('t', JSON.stringify(t));
+      let te = {
+        team: t[0].team
       }
-      console.log(te);
+      Object.assign(this.team, te);
     })
+  }
+  onPlanning(){
+    this.router.navigate(['/planning'])
   }
 
 }
