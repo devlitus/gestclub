@@ -72,7 +72,9 @@ export class MicroPage implements OnInit {
       }, 1000);
     }
   }
-  onSession(){
-    
+  onSession(micro: any){
+    localStorage.setItem('mi', JSON.stringify(micro));
+    this.router.navigate(['/session'])
+    console.log(micro)
   }
 }

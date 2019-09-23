@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../api/team.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
-import { variable } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PlanningService } from '../api/planning.service';
 
 @Component({
   selector: 'app-session',
@@ -10,48 +10,30 @@ import { variable } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./session.page.scss'],
 })
 export class SessionPage implements OnInit {
-  nameTeam: string;
-  id: any;
-  nameMicro = localStorage.getItem('mi');
-  nameMacro = localStorage.getItem('ma');
-  planificacio = localStorage.getItem('p');
-  session: any[] = [];
-  constructor(
-    private _service: TeamService,
-    public router: Router,
-    public activatedRoute: ActivatedRoute
-  ) { }
+  lsTeam = JSON.parse(localStorage.getItem('t'));
+  lsMicro = JSON.parse(localStorage.getItem('mi'));
+  planning: string;
   sessionForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    dataInit: new FormControl('', Validators.required),
-    dataFinish: new FormControl('', Validators.required)
+    session: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
+    idPlannig: new FormControl('', Validators.required),
+    micro: new FormControl('', Validators.required)
   })
+  constructor(
+    private _servicePLa: PlanningService,
+    public router: Router,
+  ) { }
   ngOnInit() {
-    this.showTeam();
+    this.showPlanning();
   }
-  showTeam() {
-    let id = this.activatedRoute.snapshot.paramMap.get("id");
-    this._service.getTeam().subscribe(data => {
-      const team = [...data];
-      let te = team.filter((t: any) => {
-        if (t.id === id) {
-          return t;
-        }
-      });
-      this.nameTeam = te[0].team_name;
-    });
-  }
-  onExercise(){
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
-    this.router.navigate(['exercises/', this.id]);
-    localStorage.setItem('se', this.sessionForm.value.name);
+
+  showPlanning(){
+    const id = this.lsTeam[0].id_planning;
+    this._servicePLa.onlyPlanning(id).subscribe((data: any) => {
+      this.planning = data.planning; 
+    })
   }
   
-  onSubmit(e: any){
-    let session = {
-      name: this.sessionForm.value.name
-    }
-    this.session.push(session);
-    console.log(session);
-  }
+  
+  
 }
