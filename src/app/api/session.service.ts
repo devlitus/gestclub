@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { url } from "../config/config";
+import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
+import { url } from "../config/config";
 
 @Injectable({
   providedIn: "root"
@@ -19,17 +19,30 @@ export class SessionService {
       })
     );
   }
-  insertSession(session: any){
-    return this._http.post(`${url}`, session).pipe(
+  getMaterialSession(micro: string, id: number) {
+    return this._http
+      .post(`${url}/material_session`, { id: id, micro: micro })
+      .pipe(
+        map((data: any) => {
+          if (data.ok) {
+            return data.material;
+          } else {
+            return data.error;
+          }
+        })
+      );
+  }
+  insertSession(session: any) {
+    return this._http.post(`${url}/inser_session`, session).pipe(
       map((data: any) => {
         if (data.ok) {
           console.log(data.message);
           return data.message;
-        }else{
+        } else {
           console.log(data.error);
           return data.error;
         }
       })
-    )
+    );
   }
 }

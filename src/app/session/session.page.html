@@ -16,23 +16,32 @@
     <ion-item>
       <ion-label position="floating">Nom de la Sessió <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input  formControlName="session" name="session" type="text" required></ion-input>
+      <ion-input formControlName="session" name="session" type="text" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Data <ion-text color="danger">*</ion-text>
+      <ion-label position="inline">Data d'inici<ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input formControlName="date" name="date" type="date" required></ion-input>
+      <ion-input formControlName="dateInit" name="dateInit" type="date" required></ion-input>
     </ion-item>
-    <!-- <ion-item>
-      <ion-input type="file"></ion-input>
-    </ion-item> -->
+    <ion-item>
+      <ion-label position="inline">Data Final<ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input formControlName="dateFinish" name="dateFinish" type="date" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Materies</ion-label>
+      <ion-select formControlName="material" name="material" placeholder="Seleccionar Materies">
+        <ion-select-option *ngFor="let material of materials" [value]="material.id">{{material.material_session}}</ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-button expand="block" type="submit" class="bg-btn" [disabled]="!sessionForm.valid">
       Afegir
       <ion-icon slot="end" name="add"></ion-icon>
     </ion-button>
   </form>
   <ion-list *ngIf="session">
-    <p>Llistat de sessión del <ion-badge color="tertiary" mode="md">42</ion-badge></p>
+    <p>Llistat de sessión del <ion-badge color="tertiary" mode="md">42</ion-badge>
+    </p>
     <ion-item *ngFor="let se of session" (click)="onExercise(se)">
       <ion-label>{{se.name}}</ion-label>
     </ion-item>
