@@ -44,7 +44,7 @@
     </ion-button>
   </form>
   <div *ngIf="macros.length !== 0">
-    <p >Llista de Macrocicles </p>
+    <p >Llista de Macrocicles <ion-badge color="primary" mode="md">{{ teamName[0].team }}</ion-badge></p>
     <ion-list>
       <ion-item *ngFor="let m of macros" (click)="onMicro(m)">
         <ion-label>{{ m.macro }}</ion-label>

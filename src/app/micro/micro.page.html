@@ -31,7 +31,12 @@
       <ion-label>Materies</ion-label>
       <ion-select formControlName="material" name="material" multiple="true" cancelText="Cancel" okText="Ok!"
         placeholder="Seleccinar Materies">
+<<<<<<< HEAD
         <ion-select-option *ngFor="let m of material">{{m.material_micro}}</ion-select-option>
+=======
+        <ion-select-option *ngFor="let material of material" [value]="material.id">{{material.material_micro}}
+        </ion-select-option>
+>>>>>>> devlinux
       </ion-select>
     </ion-item>
     <ion-button fill="solid" type="submit" expand="full" class="bg-btn" [disabled]="!microForm.valid">
@@ -39,9 +44,16 @@
       Afegir
     </ion-button>
   </form>
+<<<<<<< HEAD
   <ion-list *ngIf="micros">
     <ion-item *ngFor="let mi of micros" (click)="onSession(mi)">
       <ion-label>{{mi.name}}</ion-label>
+=======
+  <ion-list *ngIf="micros.length !== 0">
+    <p>Llistat de microcicles de la <ion-badge color="tertiary" mode="md">{{macroName}}</ion-badge></p>
+    <ion-item *ngFor="let mi of micros" (click)="onSession(mi)">
+      <ion-label>{{mi.micro}}</ion-label>
+>>>>>>> devlinux
     </ion-item>
   </ion-list>
 </ion-content>

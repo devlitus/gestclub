@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'planning', loadChildren: './planning/planning.module#PlanningPageModule' },
   { path: 'macro/:id', loadChildren: './macro/macro.module#MacroPageModule' },
   { path: 'micro/:id', loadChildren: './micro/micro.module#MicroPageModule' },
-  { path: 'session/:id', loadChildren: './session/session.module#SessionPageModule' },
+  { path: 'session', loadChildren: './session/session.module#SessionPageModule' },
   { path: 'exercises/:id', loadChildren: './exercises/exercises.module#ExercisesPageModule' },
   { path: 'ratings', loadChildren: './ratings/ratings.module#RatingsPageModule' },
   { path: 'ratings/detail/:id', component: RatingDetailComponent },

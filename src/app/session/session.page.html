@@ -3,41 +3,46 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="micro/{{id}}"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{planificacio}}</ion-title>
-    <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{nameTeam}}</ion-badge>
-    <ion-badge slot="end" color="secondary" mode="md" style="margin-right: 15px">{{nameMacro}}</ion-badge>
+    <ion-title>{{planning}}</ion-title>
+    <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{lsTeam[0].team}}</ion-badge>
+    <!-- <ion-badge slot="end" color="secondary" mode="md" style="margin-right: 15px">45</ion-badge> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h2 text-center>{{nameMicro}}</h2>
+  <h2 text-center>{{lsMicro.macro}} &rArr; {{lsMicro.micro}}</h2>
   <p>Afegir noves sessions</p>
   <form [formGroup]="sessionForm" (ngSubmit)="onSubmit($event)">
     <ion-item>
       <ion-label position="floating">Nom de la Sessió <ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input  formControlName="name" name="name" type="text" required></ion-input>
+      <ion-input formControlName="session" name="session" type="text" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      <ion-label position="inline">Data d'inici<ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input formControlName="dataInit" name="dataInit" type="date" required></ion-input>
+      <ion-input formControlName="dateInit" name="dateInit" type="date" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="inline">Data d'Inici <ion-text color="danger">*</ion-text>
+      <ion-label position="inline">Data Final<ion-text color="danger">*</ion-text>
       </ion-label>
-      <ion-input formControlName="dataFinish" name="dataFinish" type="date" required></ion-input>
+      <ion-input formControlName="dateFinish" name="dateFinish" type="date" required></ion-input>
     </ion-item>
-    <!-- <ion-item>
-      <ion-input type="file"></ion-input>
-    </ion-item> -->
-    <ion-button expand="block" type="submit" class="bg-btn">
+    <ion-item>
+      <ion-label>Materies</ion-label>
+      <ion-select formControlName="material" name="material" placeholder="Seleccionar Materies">
+        <ion-select-option *ngFor="let material of materials" [value]="material.id">{{material.material_session}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button expand="block" type="submit" class="bg-btn" [disabled]="!sessionForm.valid">
       Afegir
       <ion-icon slot="end" name="add"></ion-icon>
     </ion-button>
   </form>
   <ion-list *ngIf="session">
-    <ion-item *ngFor="let se of session" (click)="onExercise()">
+    <p>Llistat de sessión del <ion-badge color="tertiary" mode="md">42</ion-badge>
+    </p>
+    <ion-item *ngFor="let se of session" (click)="onExercise(se)">
       <ion-label>{{se.name}}</ion-label>
     </ion-item>
   </ion-list>

@@ -7,12 +7,13 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MacroService {
-
+  macros: any[] = [];
   constructor(private _http: HttpClient) { }
   getMacro() {
     return this._http.get(`${url}/macro`).pipe(
       map((data: any) => {
         if (data.ok) {
+          console.log(data);
           return data.macro;
         } else {
           return data.error;
@@ -20,18 +21,7 @@ export class MacroService {
       })
     )
   }
-  macro(){
-    return this._http.get(`${url}/total_macro`).pipe(
-      map((data: any) => {
-        if (data.ok) {
-          return data.macro;
-        } else {
-          return data.error;
-        }
-      })
-    )
-  }
-  getMaterialMacro(){
+  getMaterialMacro() {
     return this._http.get(`${url}/material_macro`).pipe(
       map((data: any) => {
         if (data.ok) {
@@ -46,10 +36,8 @@ export class MacroService {
     return this._http.post(`${url}/insert_macro`, macro).pipe(
       map((data: any) => {
         if (data.ok) {
-          console.log(data.message);
           return data;
         } else {
-          console.log(data.error);
           return data.error;
         }
       })

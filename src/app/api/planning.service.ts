@@ -1,13 +1,14 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
-import { url } from "../config/config";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { url } from '../config/config';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class PlanningService {
-  constructor(private _http: HttpClient) {}
+
+  constructor(private _http: HttpClient) { }
 
   getPLanning() {
     return this._http.get(`${url}/planning`).pipe(
@@ -15,10 +16,11 @@ export class PlanningService {
         if (data.ok) {
           return data.planning;
         } else {
-          return data.error;
+          console.log(data.error);
+          return data.error
         }
       })
-    );
+    )
   }
   onlyPlanning(id: any){
     return this._http.post(`${url}/only_planning`, { id: id }).pipe(
@@ -31,27 +33,36 @@ export class PlanningService {
       })
     );
   }
-  // Obtener un join de team y planning
-  getPlanningTeam(id: any) {
+
+  planningTeam(id: any) {
     return this._http.post(`${url}/planning_team`, { id: id }).pipe(
       map((data: any) => {
         if (data.ok) {
-          return data.team;
+          return data.planning;
         } else {
-          return data.error;
+          console.log(data.error);
+          return data.error
         }
       })
-    );
+    )
   }
   insertPlanning(planning: any) {
     return this._http.post(`${url}/insert_planning`, planning).pipe(
       map((data: any) => {
         if (data.ok) {
+<<<<<<< HEAD
           return data.message;
         } else {
           return data.error;
+=======
+          console.log(data.message);
+          return data.message;
+        } else {
+          console.log(data.error);
+          return data.error
+>>>>>>> devlinux
         }
       })
-    );
+    )
   }
 }

@@ -1,15 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { TeamService } from "../api/team.service";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { PlanningService } from "../api/planning.service";
-import { MacroService } from "../api/macro.service";
-import { ToastController } from "@ionic/angular";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MacroService } from '../api/macro.service';
+import { ToastController } from '@ionic/angular';
+import { PlanningService } from '../api/planning.service';
 
 @Component({
-  selector: "app-macro",
-  templateUrl: "./macro.page.html",
-  styleUrls: ["./macro.page.scss"]
+  selector: 'app-macro',
+  templateUrl: './macro.page.html',
+  styleUrls: ['./macro.page.scss'],
 })
 export class MacroPage implements OnInit {
   material: any[] = [];
@@ -62,6 +61,10 @@ export class MacroPage implements OnInit {
   onMicro(macro: any){
     let id = macro.id_planning;
     let macroName = macro.macro;
+<<<<<<< HEAD
+=======
+    console.log(macro)
+>>>>>>> devlinux
     localStorage.setItem('ma', macroName);
     this.router.navigate(['/micro', id]);
   }
@@ -89,4 +92,5 @@ export class MacroPage implements OnInit {
     });
     toast.present();
   }
+
 }
