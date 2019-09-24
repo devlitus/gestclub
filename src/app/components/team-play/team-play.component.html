@@ -24,7 +24,7 @@
             <ion-item>
               <ion-label position="floating">Data d'inici <ion-text color="danger">*</ion-text>
               </ion-label>
-              <ion-select placeholder="Data" name="dataInit" [(ngModel)]="dataInit">
+              <ion-select placeholder="Data" name="dataInit" [(ngModel)]="dataInit" >
                 <ion-select-option *ngFor="let d of date" [value]="d">{{d}}</ion-select-option>
               </ion-select>
             </ion-item>
