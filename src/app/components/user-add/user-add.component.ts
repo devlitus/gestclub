@@ -9,14 +9,8 @@ import { UserService } from "src/app/api/user.service";
 })
 export class UserAddComponent implements OnInit {
   email = {
-<<<<<<< HEAD
-    invalid: false,
-    touched: false
-  }
-=======
     invalid: false
   };
->>>>>>> dev
 
   constructor(private _service: UserService) {}
   userForm = new FormGroup({

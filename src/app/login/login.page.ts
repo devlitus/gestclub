@@ -13,8 +13,6 @@ export class LoginPage implements OnInit {
   pass: any;
   name: any;
   constructor(private _service: UserService, public alertCtrl: AlertController,) {}
-  name: any;
-  pass: any;
   ngOnInit() {}
   onSubmit(form: NgForm) {
     if (

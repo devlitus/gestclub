@@ -19,29 +19,6 @@ export class MicroService {
       })
     );
   }
-<<<<<<< HEAD
-  getMacroPlanning(id: any) {
-    return this._http.post(`${url}/macro_planning`, { id: id }).pipe(
-      map((data: any) => {
-        if (data.ok) {
-          return data.macro;
-        } else {
-          return data.error;
-        }
-      })
-    );
-  }
-  getMaterialMicro(id: any, macro: string) {
-    return this._http.post(`${url}/material_micro`, { id: id, macro: macro }).pipe(
-      map((data: any) => {
-        if (data.ok) {
-          return data.material;
-        } else {
-          return data.error;
-        }
-      })
-    );
-=======
   getMaterialMicro(id: any, macro: string) {
     return this._http
       .post(`${url}/material_micro`, { id: id, macro: macro })
@@ -54,7 +31,6 @@ export class MicroService {
           }
         })
       );
->>>>>>> devlinux
   }
   insertMicro(micro: any) {
     return this._http.post(`${url}/insert_micro`, micro).pipe(

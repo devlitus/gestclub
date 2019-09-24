@@ -99,18 +99,11 @@ export class TeamPage implements OnInit {
       event.target.complete();
     }, 1000);
   }
-<<<<<<< HEAD
-  onTeamUpdate(teamId: any, teamTeam: any){
-    let currentTeam = {
-      id: teamId,
-      name: teamTeam
-=======
   onTeamUpdate(team: any){
     const te = {
       id: team.id,
       team: team.team,
       idPlanning: team.id_planning
->>>>>>> devlinux
     }
     localStorage.setItem('t', JSON.stringify(te));
 

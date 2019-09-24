@@ -61,10 +61,7 @@ export class MacroPage implements OnInit {
   onMicro(macro: any){
     let id = macro.id_planning;
     let macroName = macro.macro;
-<<<<<<< HEAD
-=======
     console.log(macro)
->>>>>>> devlinux
     localStorage.setItem('ma', macroName);
     this.router.navigate(['/micro', id]);
   }

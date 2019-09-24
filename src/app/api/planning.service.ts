@@ -50,17 +50,11 @@ export class PlanningService {
     return this._http.post(`${url}/insert_planning`, planning).pipe(
       map((data: any) => {
         if (data.ok) {
-<<<<<<< HEAD
-          return data.message;
-        } else {
-          return data.error;
-=======
           console.log(data.message);
           return data.message;
         } else {
           console.log(data.error);
           return data.error
->>>>>>> devlinux
         }
       })
     )

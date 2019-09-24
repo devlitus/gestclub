@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-=======
 import { FormControl, FormGroup, Validators } from '@angular/forms';
->>>>>>> devlinux
 import { ActivatedRoute, Router } from '@angular/router';
 import { MicroService } from '../api/micro.service';
 import { PlanningService } from '../api/planning.service';
@@ -17,10 +14,7 @@ export class MicroPage implements OnInit {
   macroName = localStorage.getItem('ma');
   team = JSON.parse(localStorage.getItem('t'));
   planningName: string;
-<<<<<<< HEAD
-=======
   micros: any[] = [];
->>>>>>> devlinux
   material: any[] = [];
   microForm = new FormGroup({
     micro: new FormControl('', Validators.required),
@@ -41,11 +35,6 @@ export class MicroPage implements OnInit {
     this.showMaterialMicro();
   }
   showMicro(){
-<<<<<<< HEAD
-    this._service.getMicro().subscribe(data => {
-      console.log(data);
-    })
-=======
     this._service.getMicro().subscribe((data: any) => {
       let micro = [...data];
       let mi = micro.filter(m => {
@@ -55,7 +44,6 @@ export class MicroPage implements OnInit {
       });
       this.micros = mi;
     });
->>>>>>> devlinux
   }
   onlyPlanning(){
     this._servicePlanning.onlyPlanning(this.idPlanning).subscribe(data => {
