@@ -38,6 +38,8 @@ export class MicroPage implements OnInit {
     this._service.getMicro().subscribe((data: any) => {
       let micro = [...data];
       let mi = micro.filter(m => {
+        
+        console.log(m);
         if (m.planning_id === this.idPlanning && m.macro === this.macroName) {
           return m
         }

@@ -4,8 +4,5 @@
 // Desarrollo
 // export const url: string = 'http://localhost/apigestdepor';
 
-// Desarrolo linux
-// export const url: string = 'http://server.net/apigestdepor';
-
-// Desarrolo linux
-export const url: string = 'http://server.loc/apigestdepor';
+// Desarrollo linux
+export const url: string = 'http://server.net/apigestdepor';
