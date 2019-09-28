@@ -14,6 +14,7 @@ export class SessionService {
         if (data.ok) {
           return data.session;
         } else {
+          console.log(data.error);
           return data.error;
         }
       })
@@ -27,13 +28,14 @@ export class SessionService {
           if (data.ok) {
             return data.material;
           } else {
+            console.log(data.error);
             return data.error;
           }
         })
       );
   }
   insertSession(session: any) {
-    return this._http.post(`${url}/inser_session`, session).pipe(
+    return this._http.post(`${url}/insert_session`, session).pipe(
       map((data: any) => {
         if (data.ok) {
           console.log(data.message);

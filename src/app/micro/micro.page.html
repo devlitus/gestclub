@@ -42,7 +42,7 @@
   </form>
   <ion-list *ngIf="micros.length !== 0">
     <p>Llistat de microcicles de la <ion-badge color="tertiary" mode="md">{{macroName}}</ion-badge></p>
-    <ion-item *ngFor="let mi of micros" (click)="onSession(mi)">
+    <ion-item *ngFor="let mi of micros; let i index" (click)="onSession(mi, i)">
       <ion-label>{{mi.micro}}</ion-label>
     </ion-item>
   </ion-list>

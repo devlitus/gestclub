@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="micro/{{id}}"></ion-back-button>
+      <ion-back-button defaultHref="micro/{{lsMicro.id_plannign}}"></ion-back-button>
     </ion-buttons>
     <ion-title>{{planning}}</ion-title>
     <ion-badge slot="end" color="primary" mode="md" style="margin-right: 15px">{{lsTeam[0].team}}</ion-badge>
@@ -30,7 +30,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Materies</ion-label>
-      <ion-select formControlName="material" name="material" placeholder="Seleccionar Materies">
+      <ion-select formControlName="material" name="material" multiple="true" placeholder="Seleccionar Materies">
         <ion-select-option *ngFor="let material of materials" [value]="material.id">{{material.material_session}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -39,11 +39,11 @@
       <ion-icon slot="end" name="add"></ion-icon>
     </ion-button>
   </form>
-  <ion-list *ngIf="session">
-    <p>Llistat de sessión del <ion-badge color="tertiary" mode="md">42</ion-badge>
+  <ion-list *ngIf="session.length !== 0">
+    <p>Llistat de sessión del <ion-badge color="tertiary" mode="md">{{lsMicro.micro}}</ion-badge>
     </p>
     <ion-item *ngFor="let se of session" (click)="onExercise(se)">
-      <ion-label>{{se.name}}</ion-label>
+      <ion-label>{{se.session}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

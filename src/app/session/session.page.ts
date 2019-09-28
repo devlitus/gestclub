@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../api/team.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PlanningService } from '../api/planning.service';
 import { SessionService } from '../api/session.service';
@@ -15,6 +15,7 @@ export class SessionPage implements OnInit {
   lsMicro = JSON.parse(localStorage.getItem('mi'));
   planning: string;
   materials: any[] = [];
+  session: any[] = [];
   sessionForm = new FormGroup({
     session: new FormControl('', Validators.required),
     dateInit: new FormControl('', Validators.required),
@@ -25,6 +26,7 @@ export class SessionPage implements OnInit {
     private _servicePLa: PlanningService,
     private _serviceSession: SessionService,
     public router: Router,
+    public activatedRoute: ActivatedRoute
   ) { }
   ngOnInit() {
     this.showPlanning();
@@ -33,14 +35,14 @@ export class SessionPage implements OnInit {
   }
   showSession(){
     this._serviceSession.getSession().subscribe((data: any) => {
+      this.session = data;
       console.log(data);
     })
   }
   showMaterialSession(){
     let micro =this.lsMicro.micro;
-    let id = this.lsMicro.planning_id
+    let id = this.lsMicro.id_planning;
     this._serviceSession.getMaterialSession(micro, id).subscribe((data: any) => {
-      console.log(data);
       this.materials = data;
     })
   }
@@ -56,11 +58,14 @@ export class SessionPage implements OnInit {
         session: this.sessionForm.value.session,
         dateInit: this.sessionForm.value.dateInit,
         dateFinish: this.sessionForm.value.dateFinish,
-        idPlanning: this.lsMicro.planning_id,
+        idPlanning: this.lsMicro.id_planning,
+        material: this.sessionForm.value.material,
         micro: this.lsMicro.micro
       }
-      console.log(session)
-      // this._serviceSession.insertSession(session).subscribe();
+      this._serviceSession.insertSession(session).subscribe();
+      setTimeout(() => {
+        this.showSession();
+      }, 1000);
     }
   }
   onExercise(exercice: any){

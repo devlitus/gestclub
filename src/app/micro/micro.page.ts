@@ -38,9 +38,7 @@ export class MicroPage implements OnInit {
     this._service.getMicro().subscribe((data: any) => {
       let micro = [...data];
       let mi = micro.filter(m => {
-        
-        console.log(m);
-        if (m.planning_id === this.idPlanning && m.macro === this.macroName) {
+        if (m.id_planning === this.idPlanning && m.macro === this.macroName) {
           return m
         }
       });
@@ -74,7 +72,7 @@ export class MicroPage implements OnInit {
       }, 1000);
     }
   }
-  onSession(micro: any){
+  onSession(micro: any, index: number){
     localStorage.setItem('mi', JSON.stringify(micro));
     this.router.navigate(['/session'])
     console.log(micro)
