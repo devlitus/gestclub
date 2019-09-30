@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../api/user.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonItemSliding, IonList } from '@ionic/angular';
 
 
 @Component({
@@ -9,6 +9,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./users.page.scss'],
 })
 export class UsersPage implements OnInit {
+  @ViewChild('list', {static: true}) itemList: IonList;
   users: any = []
   constructor(public _serviceUser:UserService, public alertCtrl: AlertController) { }
   
@@ -22,7 +23,6 @@ export class UsersPage implements OnInit {
     this._serviceUser.getTotalUsers()
     .subscribe((data: any) => {
       this.users = [...data];
-      console.log(this.users);
     })
   }
 
@@ -40,7 +40,10 @@ export class UsersPage implements OnInit {
         {
           text: 'Cancelar', 
           role: 'cancel',
-          cssClass: 'danger'
+          cssClass: 'danger',
+          handler: () => {
+            this.itemList.closeSlidingItems();
+          }
         },
         {
           text: 'Acepta',
@@ -50,13 +53,14 @@ export class UsersPage implements OnInit {
               if(u.id !== user.id){
                 return u
               }
+              this.itemList.closeSlidingItems();
             })
             this.users = us;
             // console.log('confirmado')
           }
         }
       ]
-    })
-    await alert.present()
+    });
+    await alert.present();
   }
 }

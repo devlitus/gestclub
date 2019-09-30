@@ -3,28 +3,28 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="team/update/{{id}}"></ion-back-button>
     </ion-buttons>
-    <ion-title>Afegir al equip</ion-title>
+    <ion-title>Afegir a l'equip</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-segment (ionChange)="segmentChanged($event)">
+  <ion-segment>
     <ion-segment-button #segment value="play" checked="checked">
       Selecciona jugador
     </ion-segment-button>
-    <ion-segment-button #segment value="otros">
+    <ion-segment-button value="otros">
       Seleccionar altre
     </ion-segment-button>
   </ion-segment>
-  <div *ngIf="play">
+  <div *ngIf="segment.checked">
     <p text-center>Filtrar per edad</p>
-    <form #play="ngForm" (ngSubmit)="onSubmit(play)">
+    <form [formGroup]="formPlay" (ngSubmit)="onSubmit($event)">
       <ion-row>
         <ion-col size="6">
           <ion-item>
             <ion-item>
               <ion-label position="floating">Data d'inici <ion-text color="danger">*</ion-text>
               </ion-label>
-              <ion-select placeholder="Data" name="dataInit" [(ngModel)]="dataInit" >
+              <ion-select formControlName="dateInit" placeholder="Data" name="dateInit" okText="ok" cancelText="Cancelar" required>
                 <ion-select-option *ngFor="let d of date" [value]="d">{{d}}</ion-select-option>
               </ion-select>
             </ion-item>
@@ -34,7 +34,7 @@
           <ion-item>
             <ion-label position="floating">Data de final <ion-text color="danger">*</ion-text>
             </ion-label>
-            <ion-select placeholder="Data" [(ngModel)]="dataFinish" name="dataFinish">
+            <ion-select formControlName="dateFinish" placeholder="Data" name="dateFinish" okText="ok" cancelText="Cancelar" required>
               <ion-select-option *ngFor="let d of date" [value]="d">{{d}}</ion-select-option>
             </ion-select>
           </ion-item>
@@ -45,35 +45,27 @@
         Aceptar
       </ion-button>
     </form>
-    <ion-list [hidden]="hidden">
-      <ion-item *ngFor="let user of users">
-        <ion-avatar slot="start">
-          <img src="assets/icon/user.png" />
-        </ion-avatar>
-        <ion-label>{{ user.name }}</ion-label>
-        <ion-checkbox slot="end" name="user" [checked]="isChecked" (ionChange)="onCheck(user.name)"></ion-checkbox>
-      </ion-item>
-      <ion-button class="bg-btn" type="submit" expand="full" fill="solid">
-        <ion-icon slot="end" name="send"></ion-icon>
-        Afegir jugadors
-      </ion-button>
+    <ion-list >
+      
     </ion-list>
   </div>
-  <div *ngIf="otros">
-    <ion-item>
-      <ion-label>Tipo</ion-label>
-      <ion-select multiple="true" canselText="cancelar" okText="ok!" placeholder="Tipo" (ionChange)="onSelect($event)">
-        <ion-select-option value="1">Cordinador</ion-select-option>
-        <ion-select-option value="2">Entrenador</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-list [hidden]="hidden">
-      <ion-item *ngFor="let user of users">
+  <div *ngIf="!segment.checked">
+    <form [formGroup]="formOtros" (ngSubmit)="onSubmit($event)" >
+      <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select formControllName="otro" name="otro" multiple="true" canselText="cancelar" okText="ok!" placeholder="Tipo" (ionChange)="onSelect($event)">
+          <ion-select-option value="1">Cordinador</ion-select-option>
+          <ion-select-option value="2">Entrenador</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </form>
+    <ion-list >
+      <ion-item>
         <ion-avatar slot="start">
           <img src="assets/icon/user.png" />
         </ion-avatar>
-        <ion-label>{{ user.name }}</ion-label>
-        <ion-checkbox slot="end" name="user" [checked]="isChecked" (ionChange)="onCheck(user.name)"></ion-checkbox>
+        <ion-label></ion-label>
+        <ion-checkbox slot="end" name="user" ></ion-checkbox>
       </ion-item>
     </ion-list>
   </div>

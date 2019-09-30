@@ -63,6 +63,7 @@ export class SessionPage implements OnInit {
         micro: this.lsMicro.micro
       }
       this._serviceSession.insertSession(session).subscribe();
+      this.sessionForm.reset();
       setTimeout(() => {
         this.showSession();
       }, 1000);

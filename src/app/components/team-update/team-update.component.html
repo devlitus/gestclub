@@ -3,12 +3,13 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="team"></ion-back-button>
     </ion-buttons>
-    <ion-title>Actualizació del Equip</ion-title>
+    <ion-title>Gestió de Equip </ion-title>
+    <ion-badge slot="end" color="primary" padding>{{team.team}}</ion-badge>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <h2 text-center>{{team.name}}</h2>
-  <ion-button expand="block" fill="solid" class="bg-btn" [routerLink]="['/planning']">
+  <h2 text-center></h2>
+  <ion-button expand="block" fill="solid" class="bg-btn" [routerLink]="['/planning', team.id]">
     <ion-icon slot="start" name="clipboard"></ion-icon>
     Planificacions
   </ion-button>
@@ -20,4 +21,5 @@
     <ion-icon slot="start" name="clipboard"></ion-icon>
     Jugador / Personal
   </ion-button>
+
 </ion-content>

@@ -78,6 +78,7 @@ export class MacroPage implements OnInit {
       setTimeout(() => {
         this.showMacro();
       }, 1000);
+      this.macroForm.reset();
     } else {
       this.toast("Todos los campos deven ser rellenados");
     }

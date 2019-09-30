@@ -63,6 +63,12 @@ export class TeamPage implements OnInit {
           text: 'Ok',
           handler: (team) => {
             this.insertTeam(team);
+            setTimeout(() => {
+              console.log('Async operation has ended');
+              this.showTeam()
+              //complete()  signify that the refreshing has completed and to close the refresher
+              // event.target.complete();
+            }, 1000);
           }
         }
       ]
@@ -90,7 +96,7 @@ export class TeamPage implements OnInit {
     });
     alert.present();
   }
-  ionRefresh(event) {
+  ionRefresh(event: any) {
     console.log('Pull Event Triggered!');
     setTimeout(() => {
       console.log('Async operation has ended');
@@ -106,7 +112,6 @@ export class TeamPage implements OnInit {
       idPlanning: team.id_planning
     }
     localStorage.setItem('t', JSON.stringify(te));
-
-    this.router.navigate(['/team/update/'])
+    this.router.navigate(['/team/update/', te.id])
   }
 }

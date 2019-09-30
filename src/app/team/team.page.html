@@ -4,20 +4,20 @@
       <ion-back-button defaultHref="management"></ion-back-button>
     </ion-buttons>
     <ion-title>Equips</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-img src="assets/deportes/hockey.svg" style="width: 4vh; height: 4vh;"></ion-img>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-refresher slot="fixed" 
-    (ionRefresh)="ionRefresh($event)" 
-    >
-      <ion-refresher-content
-        pullingIcon="arrow-dropdown"
-        pullingText="Pull to refresh"
-        refreshingSpinner="circles"
-        refreshingText="Refreshing...">
-      </ion-refresher-content>
-    </ion-refresher>
+  <ion-refresher slot="fixed" (ionRefresh)="ionRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <h2 text-center>Llistat d'equips</h2>
   <ion-list lines="full" *ngFor="let team of teams">
     <ion-item-sliding>

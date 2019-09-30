@@ -29,6 +29,8 @@ export class UserService {
       map((data: any) => {
         if (data.ok) {
           return data.users;
+        }else{
+          return data.error;
         }
       })
     );
@@ -38,6 +40,8 @@ export class UserService {
       map((data: any) => {
         if (data.ok) {
           return data.user;
+        }else{
+          return data.error;
         }
       })
     );
@@ -62,9 +66,11 @@ export class UserService {
   insertUser(form: any) {
     return this._http.post(`${url}/insert_user`, form).pipe(
       map((data: any) => {
-        console.log(data);
         if (data.ok) {
           this.toast(data.message);
+        }else{
+          console.log(data.error);
+          this.toast("No s'ha pogut aplica el camvis")
         }
       })
     );
@@ -72,7 +78,11 @@ export class UserService {
   updateUser(user: any) {
     return this._http.post(`${url}/update_user`, user).pipe(
       map((data: any) => {
-        console.log(data);
+        if (data.ok){
+          this.toast(data.message);
+        }else{
+          console.log(data);
+        }
       })
     );
   }

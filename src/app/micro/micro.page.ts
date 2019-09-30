@@ -67,6 +67,7 @@ export class MicroPage implements OnInit {
         macro: this.macroName
       }
       this._service.insertMicro(micro).subscribe();
+      this.microForm.reset();
       setTimeout(() => {
         this.showMicro();
       }, 1000);

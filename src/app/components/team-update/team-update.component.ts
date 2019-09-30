@@ -26,13 +26,10 @@ export class TeamUpdateComponent implements OnInit {
       });
       localStorage.setItem('t', JSON.stringify(t));
       let te = {
+        id: t[0].id,
         team: t[0].team
       }
       Object.assign(this.team, te);
     })
   }
-  onPlanning(){
-    this.router.navigate(['/planning'])
-  }
-
 }

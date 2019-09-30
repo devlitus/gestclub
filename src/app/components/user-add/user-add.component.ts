@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { UserService } from "src/app/api/user.service";
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: "app-user-add",
@@ -12,7 +13,7 @@ export class UserAddComponent implements OnInit {
     invalid: false
   };
 
-  constructor(private _service: UserService) {}
+  constructor(private _service: UserService) { }
   userForm = new FormGroup({
     username: new FormControl("", Validators.required),
     lastname: new FormControl("", Validators.required),
@@ -21,10 +22,10 @@ export class UserAddComponent implements OnInit {
     telf: new FormControl(""),
     address: new FormControl(""),
     dni: new FormControl("", Validators.required),
-    birthday: new FormControl(""),
+    birthday: new FormControl("", Validators.required),
     tipo: new FormControl("")
   });
-  ngOnInit() {}
+  ngOnInit() { }
   onSubmit(e: any) {
     if (this.userForm.valid) {
       const user = this.userForm.value;
@@ -38,6 +39,7 @@ export class UserAddComponent implements OnInit {
       form.append("dni", user.dni);
       form.append("birthday", user.birthday);
       form.append("img", e.target.files.files[0]);
+      console.log(user.birthday)
       this._service.insertUser(form).subscribe();
       this.userForm.reset();
     }
