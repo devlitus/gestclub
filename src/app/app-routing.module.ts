@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'home/:team/:planning', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'team', loadChildren: './team/team.module#TeamPageModule' },
-  { path: 'team/update', component: TeamUpdateComponent },
+  { path: 'team/update/:id', component: TeamUpdateComponent },
   { path: 'team/play/:id', component: TeamPlayComponent },
   { path: 'deport', loadChildren: './deport/deport.module#DeportPageModule' },
   { path: 'management', loadChildren: './management/management.module#ManagementPageModule' },

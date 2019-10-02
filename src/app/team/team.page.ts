@@ -105,6 +105,6 @@ export class TeamPage implements OnInit {
       name: teamTeam
     }
     localStorage.setItem("t", JSON.stringify(currentTeam));
-    this.router.navigate(['/team/update/'])
+    this.router.navigate(['/team/update/', currentTeam.id])
   }
 }

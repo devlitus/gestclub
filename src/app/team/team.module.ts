@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { TeamPage } from './team.page';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TeamUpdateComponent } from '../components/team-update/team-update.component';
 import { TeamPlayComponent } from '../components/team-play/team-play.component';
 
@@ -20,7 +20,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

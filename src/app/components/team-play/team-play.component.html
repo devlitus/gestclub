@@ -4,6 +4,12 @@
       <ion-back-button defaultHref="team/update/{{id}}"></ion-back-button>
     </ion-buttons>
     <ion-title>Afegir al equip</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="search()">
+        <ion-icon slot="start" name="search"></ion-icon>
+        Buscar
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
@@ -16,42 +22,35 @@
     </ion-segment-button>
   </ion-segment>
   <div *ngIf="play">
-    <p text-center>Filtrar per edad</p>
-    <form #play="ngForm" (ngSubmit)="onSubmit(play)">
+    <form [formGroup]="filterEdad" (ngSubmit)="onSubmit($event)">
       <ion-row>
         <ion-col size="6">
           <ion-item>
-            <ion-item>
-              <ion-label position="floating">Data d'inici <ion-text color="danger">*</ion-text>
-              </ion-label>
-              <ion-select placeholder="Data" name="dataInit" [(ngModel)]="dataInit">
-                <ion-select-option *ngFor="let d of date" [value]="d">{{d}}</ion-select-option>
-              </ion-select>
-            </ion-item>
+            <ion-label>Data d'inici</ion-label>
+            <ion-datetime formControlName="dateInit" name="dateInit" display-format="DD.MM.YYYY" required>
+            </ion-datetime>
           </ion-item>
         </ion-col>
         <ion-col size="6">
           <ion-item>
-            <ion-label position="floating">Data de final <ion-text color="danger">*</ion-text>
-            </ion-label>
-            <ion-select placeholder="Data" [(ngModel)]="dataFinish" name="dataFinish">
-              <ion-select-option *ngFor="let d of date" [value]="d">{{d}}</ion-select-option>
-            </ion-select>
+            <ion-label>Data final</ion-label>
+            <ion-datetime formControlName="dateFinish" name="dateFinish" display-format="DD.MM.YYYY" required>
+            </ion-datetime>
           </ion-item>
         </ion-col>
       </ion-row>
       <ion-button class="bg-btn" type="submit" expand="full" fill="solid">
-        <ion-icon slot="end" name="send"></ion-icon>
+        <ion-icon slot="end" name="send" disabled="filterEdad.valid"></ion-icon>
         Aceptar
       </ion-button>
     </form>
-    <ion-list [hidden]="hidden">
+    <ion-list *ngIf="users.length !== 0">
       <ion-item *ngFor="let user of users">
         <ion-avatar slot="start">
           <img src="assets/icon/user.png" />
         </ion-avatar>
-        <ion-label>{{ user.name }}</ion-label>
-        <ion-checkbox slot="end" name="user" [checked]="isChecked" (ionChange)="onCheck(user.name)"></ion-checkbox>
+        <ion-label>{{ user.username }}</ion-label>
+        <ion-checkbox slot="end" name="user" [checked]="isChecked" (ionChange)="onCheck(user.username)"></ion-checkbox>
       </ion-item>
       <ion-button class="bg-btn" type="submit" expand="full" fill="solid">
         <ion-icon slot="end" name="send"></ion-icon>

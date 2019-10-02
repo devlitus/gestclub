@@ -33,6 +33,18 @@ export class UserService {
       })
     );
   }
+  getDateUsers(dateInit: any, dateFinish: any){
+    return this._http.post(`${url}/date_users`, {dateInit, dateFinish}).pipe(
+      map((data: any) => {
+        if (data.ok) {
+          return data.users;
+        }else{
+          console.log(data.error)
+          return data.error;
+        }
+      })
+    );
+  }
   detailUser(id: any) {
     return this._http.post(`${url}/detail_user`, { id: id }).pipe(
       map((data: any) => {

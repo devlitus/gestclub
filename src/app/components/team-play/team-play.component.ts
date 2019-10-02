@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { IonSelect } from "@ionic/angular";
-import { NgForm } from '@angular/forms';
+import { IonSelect, AlertController } from "@ionic/angular";
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/api/user.service';
+import { join } from 'path';
 
 @Component({
   selector: "app-team-play",
@@ -12,17 +14,28 @@ export class TeamPlayComponent implements OnInit {
   @ViewChild("ion-select", { static: true }) select: IonSelect;
   play: any;
   otros: any;
+  users: any[] = [];
   checked = true;
   hidden = true;
-  users = [];
-  date: any = [];
   isChecked: boolean;
-  id: any;
-  constructor(public activatedRouter: ActivatedRoute) {}
+  id: any = this.activatedRouter.snapshot.paramMap.get('id');
+  filterEdad = new FormGroup({
+    dateInit: new FormControl("", Validators.required),
+    dateFinish: new FormControl("", Validators.required)
+  });
+  constructor(
+    public activatedRouter: ActivatedRoute,
+    public alertCtrl: AlertController,
+    private serviceUser: UserService
+  ) { }
 
   ngOnInit() {
-    this.restarYear();
-    this.id = this.activatedRouter.snapshot.paramMap.get('id');
+    // this.getUsers();
+  }
+  getUsers() {
+    this.serviceUser.getTotalUsers().subscribe((data: any) => {
+      this.users = [...data];
+    })
   }
   segmentChanged(e: any) {
     if (e.detail.value === "play") {
@@ -38,60 +51,46 @@ export class TeamPlayComponent implements OnInit {
       this.otros = false;
     }
   }
-  onSubmit(form: NgForm) {
-    this.hidden = false;
-    this.users = [
-      { name: "Antonio Fernandez" },
-      { name: "Maria Perez" },
-      { name: "Jordi Pujol" },
-      { name: "Pepe Hernandez" }
-    ];
-    console.log(form.value);
+  onSubmit($e: any) {
+    let strDateInit = this.filterEdad.value.dateInit.substring(0,10);
+    let strDateFinish = this.filterEdad.value.dateFinish.substring(0,10);
+    console.log(strDateInit);
+    console.log(strDateFinish);
+    this.serviceUser.getDateUsers(strDateInit, strDateFinish).subscribe((data: any) => {
+      this.users = [...data];
+      console.log(this.users);
+    })
   }
-  onCheck(user: any){
-    console.log(user);
+
+  search() {
+    this.alert();
   }
-  onSelect(e: any) {
-    if (e.detail.value[0] == 1) {
-      this.hidden = false;
-      this.users = [
-        { name: "Antonio Fernandez" },
-        { name: "Maria Perez" },
-        { name: "Jordi Pujol" },
-        { name: "Pepe Hernandez" }
-      ];
-    } else {
-      this.hidden = false;
-      this.users = [
-        { name: "Pepeito Perez" },
-        { name: "Jose Pujol" },
-        { name: "Manuel Fernandez" },
-        { name: "Julia Heferson" }
-      ];
-    }
-    if (e.detail.value[0] == 1 && e.detail.value[1] == 2) {
-      this.users = [
-        { name: "Pepeito Perez" },
-        { name: "Jose Pujol" },
-        { name: "Manuel Fernandez" },
-        { name: "Julia Heferson" },
-        { name: "Antonio Fernandez" },
-        { name: "Maria Perez" },
-        { name: "Jordi Pujol" },
-        { name: "Pepe Hernandez" }
-      ];
-      console.log(e.detail.value);
-    }
-  }
-  restarYear(){
-    let cantidad = 1
-    let contador = 30
-    while(contador >= 0){
-      let restaYear = new Date().getFullYear()+1;
-      restaYear = restaYear - cantidad;
-      this.date.push(restaYear);
-      cantidad++;
-      contador--;
-    }
+  async alert() {
+    const alert = await this.alertCtrl.create({
+      header: "Introduir el nom a buscar",
+      inputs: [
+        {
+          name: 'username',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('cancelado');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: (username) => {
+            console.log(username);
+          }
+        }
+      ]
+    })
+    await alert.present();
   }
 }
