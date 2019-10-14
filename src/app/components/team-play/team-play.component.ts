@@ -19,7 +19,7 @@ export class TeamPlayComponent implements OnInit {
   formOtros = new FormGroup({
 
   })
-  constructor(public activatedRouter: ActivatedRoute) {}
+  constructor(public activatedRouter: ActivatedRoute) { }
 
   ngOnInit() {
     this.restarYear();
@@ -29,17 +29,17 @@ export class TeamPlayComponent implements OnInit {
       console.log(this.formPlay.value)
     }
   }
-  onCheck(user: any){
+  onCheck(user: any) {
     console.log(user);
   }
   onSelect(e: any) {
-    
+
   }
-  restarYear(){
+  restarYear() {
     let cantidad = 1
     let contador = 30
-    while(contador >= 0){
-      let restaYear = new Date().getFullYear()+1;
+    while (contador >= 0) {
+      let restaYear = new Date().getFullYear() + 1;
       restaYear = restaYear - cantidad;
       this.date.push(restaYear);
       cantidad++;

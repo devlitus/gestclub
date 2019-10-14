@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "src/app/api/user.service";
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: "app-user-add",
@@ -39,7 +38,6 @@ export class UserAddComponent implements OnInit {
       form.append("dni", user.dni);
       form.append("birthday", user.birthday);
       form.append("img", e.target.files.files[0]);
-      console.log(user.birthday)
       this._service.insertUser(form).subscribe();
       this.userForm.reset();
     }
